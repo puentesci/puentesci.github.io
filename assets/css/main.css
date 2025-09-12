@@ -220,7 +220,7 @@
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-teal), var(--accent-primary));
     position: relative;
-    animation: rotate 20s linear infinite;
+    animation: pulse 2s ease-in-out infinite;
     box-shadow: var(--shadow-xl);
 }
 
@@ -231,7 +231,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: var(--font-size-6xl);
-    animation: rotateReverse 20s linear infinite;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 /* Services Section */
