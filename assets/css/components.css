@@ -398,10 +398,10 @@
     height: 600px;
     border: 2px solid transparent;
     border-radius: 50%;
-    background: linear-gradient(45deg, #28ABFF, #4DB8FF) padding-box,
-                linear-gradient(45deg, #28ABFF, #4DB8FF, #28ABFF) border-box;
-    animation: spinRing 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    opacity: 0.3;
+    background: linear-gradient(#0000, #0000) padding-box,
+                linear-gradient(45deg, #7CC7FF, #B3DDFF, #7CC7FF) border-box;
+    animation: spinRing 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0.1;
     z-index: -1;
 }
 
@@ -414,7 +414,7 @@
     animation: logoEntrance 2s ease-out forwards;
     filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
 .loading-progress {
