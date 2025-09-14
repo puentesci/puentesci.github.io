@@ -290,30 +290,302 @@ class LoadingAnimation {
         this.loadingScreen = document.getElementById('loading-screen');
         this.progressBar = document.querySelector('.progress-bar');
         this.isComplete = false;
+        this.loadingStartTime = performance.now();
+        this.minLoadingTime = this.getMinLoadingTime();
+        this.resourceProgress = {
+            dom: 0,
+            css: 0,
+            js: 0,
+            images: 0,
+            fonts: 0,
+            total: 0
+        };
+        this.resourceWeights = {
+            dom: 20,
+            css: 25,
+            js: 25,
+            images: 20,
+            fonts: 10
+        };
+        this.networkInfo = this.getNetworkInfo();
+        this.loadingMessages = this.getLoadingMessages();
+        this.currentMessageIndex = 0;
+    }
+
+    getMinLoadingTime() {
+        // Adjust minimum loading time based on network conditions
+        if (navigator.connection) {
+            const connection = navigator.connection;
+            if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                return 2000; // 2 seconds for slow connections
+            } else if (connection.effectiveType === '3g') {
+                return 1500; // 1.5 seconds for medium connections
+            }
+        }
+        return 1000; // 1 second for fast connections
+    }
+
+    getNetworkInfo() {
+        if (navigator.connection) {
+            return {
+                effectiveType: navigator.connection.effectiveType,
+                downlink: navigator.connection.downlink,
+                rtt: navigator.connection.rtt
+            };
+        }
+        return null;
+    }
+
+    getLoadingMessages() {
+        const messages = [
+            "Loading Puente Scientific...",
+            "Preparing your experience...",
+            "Almost ready...",
+            "Welcome to Puente Scientific!"
+        ];
+        
+        // Add network-specific messages
+        if (this.networkInfo && this.networkInfo.effectiveType === 'slow-2g') {
+            messages.splice(1, 0, "Optimizing for your connection...");
+        }
+        
+        return messages;
     }
 
     start() {
         if (!this.loadingScreen) return Promise.resolve();
 
         return new Promise((resolve) => {
-            // Simulate loading progress
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    
-                    setTimeout(() => {
-                        this.complete();
-                        resolve();
-                    }, 500);
-                }
-                
-                if (this.progressBar) {
-                    this.progressBar.style.width = `${progress}%`;
-                }
-            }, 100);
+            this.setupResourceTracking();
+            this.setupLoadingMessages();
+            this.updateProgress();
+            
+            // Ensure minimum loading time for smooth UX
+            const minTimePromise = new Promise(resolveMin => {
+                setTimeout(resolveMin, this.minLoadingTime);
+            });
+            
+            // Wait for actual page load
+            const actualLoadPromise = this.waitForPageLoad();
+            
+            // Resolve when both conditions are met
+            Promise.all([minTimePromise, actualLoadPromise]).then(() => {
+                this.complete();
+                resolve();
+            });
+        });
+    }
+
+    setupLoadingMessages() {
+        const messageElement = this.loadingScreen.querySelector('.loading-message');
+        if (!messageElement) return;
+
+        // Show first message immediately
+        messageElement.textContent = this.loadingMessages[0];
+        
+        // Update messages based on progress
+        const messageInterval = setInterval(() => {
+            if (this.isComplete) {
+                clearInterval(messageInterval);
+                return;
+            }
+            
+            this.currentMessageIndex = Math.min(
+                this.currentMessageIndex + 1,
+                this.loadingMessages.length - 1
+            );
+            
+            messageElement.textContent = this.loadingMessages[this.currentMessageIndex];
+        }, this.minLoadingTime / this.loadingMessages.length);
+    }
+
+    setupResourceTracking() {
+        // Track DOM loading
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.resourceProgress.dom = 100;
+                this.updateProgress();
+            });
+        } else {
+            this.resourceProgress.dom = 100;
+        }
+
+        // Track CSS loading
+        this.trackStylesheets();
+
+        // Track JavaScript loading
+        this.trackScripts();
+
+        // Track images loading
+        this.trackImages();
+
+        // Track fonts loading
+        this.trackFonts();
+
+        // Track overall page load
+        if (document.readyState === 'loading') {
+            window.addEventListener('load', () => {
+                this.resourceProgress.total = 100;
+                this.updateProgress();
+            });
+        } else {
+            this.resourceProgress.total = 100;
+        }
+    }
+
+    trackStylesheets() {
+        const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+        let loadedStylesheets = 0;
+        
+        if (stylesheets.length === 0) {
+            this.resourceProgress.css = 100;
+            return;
+        }
+
+        stylesheets.forEach(link => {
+            if (link.sheet) {
+                loadedStylesheets++;
+            } else {
+                link.addEventListener('load', () => {
+                    loadedStylesheets++;
+                    this.resourceProgress.css = (loadedStylesheets / stylesheets.length) * 100;
+                    this.updateProgress();
+                });
+                link.addEventListener('error', () => {
+                    loadedStylesheets++;
+                    this.resourceProgress.css = (loadedStylesheets / stylesheets.length) * 100;
+                    this.updateProgress();
+                });
+            }
+        });
+
+        if (loadedStylesheets === stylesheets.length) {
+            this.resourceProgress.css = 100;
+        }
+    }
+
+    trackScripts() {
+        const scripts = document.querySelectorAll('script[src]');
+        let loadedScripts = 0;
+        
+        if (scripts.length === 0) {
+            this.resourceProgress.js = 100;
+            return;
+        }
+
+        scripts.forEach(script => {
+            if (script.readyState === 'complete' || script.readyState === 'loaded') {
+                loadedScripts++;
+            } else {
+                script.addEventListener('load', () => {
+                    loadedScripts++;
+                    this.resourceProgress.js = (loadedScripts / scripts.length) * 100;
+                    this.updateProgress();
+                });
+                script.addEventListener('error', () => {
+                    loadedScripts++;
+                    this.resourceProgress.js = (loadedScripts / scripts.length) * 100;
+                    this.updateProgress();
+                });
+            }
+        });
+
+        if (loadedScripts === scripts.length) {
+            this.resourceProgress.js = 100;
+        }
+    }
+
+    trackImages() {
+        const images = document.querySelectorAll('img');
+        let loadedImages = 0;
+        
+        if (images.length === 0) {
+            this.resourceProgress.images = 100;
+            return;
+        }
+
+        images.forEach(img => {
+            if (img.complete && img.naturalHeight !== 0) {
+                loadedImages++;
+            } else {
+                img.addEventListener('load', () => {
+                    loadedImages++;
+                    this.resourceProgress.images = (loadedImages / images.length) * 100;
+                    this.updateProgress();
+                });
+                img.addEventListener('error', () => {
+                    loadedImages++;
+                    this.resourceProgress.images = (loadedImages / images.length) * 100;
+                    this.updateProgress();
+                });
+            }
+        });
+
+        if (loadedImages === images.length) {
+            this.resourceProgress.images = 100;
+        }
+    }
+
+    trackFonts() {
+        if ('fonts' in document) {
+            document.fonts.ready.then(() => {
+                this.resourceProgress.fonts = 100;
+                this.updateProgress();
+            });
+        } else {
+            // Fallback for browsers without Font Loading API
+            setTimeout(() => {
+                this.resourceProgress.fonts = 100;
+                this.updateProgress();
+            }, 1000);
+        }
+    }
+
+    updateProgress() {
+        const totalProgress = 
+            (this.resourceProgress.dom * this.resourceWeights.dom / 100) +
+            (this.resourceProgress.css * this.resourceWeights.css / 100) +
+            (this.resourceProgress.js * this.resourceWeights.js / 100) +
+            (this.resourceProgress.images * this.resourceWeights.images / 100) +
+            (this.resourceProgress.fonts * this.resourceWeights.fonts / 100);
+
+        if (this.progressBar) {
+            this.progressBar.style.width = `${Math.min(totalProgress, 100)}%`;
+            
+            // Add smooth transition effect
+            this.progressBar.style.transition = 'width 0.3s ease-out';
+        }
+
+        // Update loading message based on progress
+        this.updateLoadingMessage(totalProgress);
+    }
+
+    updateLoadingMessage(progress) {
+        const messageElement = this.loadingScreen.querySelector('.loading-message');
+        if (!messageElement) return;
+
+        let message = this.loadingMessages[0];
+        
+        if (progress >= 25 && progress < 50) {
+            message = this.loadingMessages[1];
+        } else if (progress >= 50 && progress < 75) {
+            message = this.loadingMessages[2];
+        } else if (progress >= 75) {
+            message = this.loadingMessages[3];
+        }
+
+        if (messageElement.textContent !== message) {
+            messageElement.textContent = message;
+        }
+    }
+
+    waitForPageLoad() {
+        return new Promise((resolve) => {
+            if (document.readyState === 'complete') {
+                resolve();
+            } else {
+                window.addEventListener('load', resolve);
+            }
         });
     }
 
