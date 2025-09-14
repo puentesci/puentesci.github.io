@@ -120,7 +120,7 @@
 }
 
 .hero-text {
-    animation: slideInLeft 1s ease-out;
+    /* Animation will be applied to individual elements */
 }
 
 .hero-title {
@@ -130,6 +130,8 @@
     line-height: var(--line-height-tight);
     color: var(--text-primary);
     margin-bottom: var(--space-6);
+    opacity: 0;
+    transform: translateX(-100px);
 }
 
 .title-line {
@@ -137,15 +139,8 @@
     position: relative;
 }
 
-.title-line:first-child {
+.title-line {
     color: var(--primary-teal);
-}
-
-.title-line:last-child {
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .hero-subtitle {

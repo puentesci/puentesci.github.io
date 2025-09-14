@@ -209,6 +209,20 @@ gtag('config', 'G-XV96WERESM', {
 - GA4 documentation
 - Analytics community forums
 
+## Related Documentation
+
+### Project Documentation
+- [README.md](../README.md) - Complete project overview with analytics integration details
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Deployment guide and hosting setup
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Development guidelines including analytics testing
+- [CHANGELOG.md](CHANGELOG.md) - Analytics feature history and updates
+
+### External Resources
+- [Google Analytics 4 Documentation](https://developers.google.com/analytics/devguides/collection/ga4)
+- [GA4 Event Measurement](https://developers.google.com/analytics/devguides/collection/ga4/events)
+- [Google Analytics Help Center](https://support.google.com/analytics/)
+- [GA4 Migration Guide](https://support.google.com/analytics/answer/9744165)
+
 ## Integration Benefits
 
 This comprehensive analytics setup provides:

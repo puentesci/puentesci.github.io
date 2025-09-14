@@ -417,6 +417,17 @@
     z-index: 10;
 }
 
+.loading-message {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.5s forwards;
+    min-height: 1.5em;
+    transition: opacity 0.3s ease-out;
+}
+
 .loading-progress {
     width: 400px;
     max-width: 90vw;

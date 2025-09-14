@@ -1,0 +1,269 @@
+/* Contact Page Styles */
+
+.contact-page {
+    min-height: 100vh;
+    padding: 8rem 0 4rem;
+    background: var(--bg-primary);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.contact-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divider {
+    font-size: 2rem;
+    color: var(--primary-teal);
+    margin: 2rem 0;
+    letter-spacing: 0.5rem;
+}
+
+.contact-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.contact-option:hover {
+    border-color: var(--primary-teal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45, 139, 139, 0.15);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background: rgba(45, 139, 139, 0.1);
+    border-radius: 50%;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.contact-info a {
+    font-size: 1.1rem;
+    color: var(--primary-teal);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--primary-teal-dark, #2d6a6b);
+    text-decoration: underline;
+}
+
+.contact-cta {
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark, #2d6a6b));
+    border-radius: 1.5rem;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+    margin-top: 3rem;
+}
+
+.cta-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cta-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.cta-buttons .btn-primary {
+    background: white;
+    color: var(--primary-teal);
+    border: 2px solid white;
+}
+
+.cta-buttons .btn-primary:hover {
+    background: transparent;
+    color: white;
+}
+
+.cta-buttons .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.cta-buttons .btn-secondary:hover {
+    background: white;
+    color: var(--primary-teal);
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-option {
+    animation: slideInUp 0.6s ease-out;
+}
+
+.contact-option:nth-child(1) { animation-delay: 0.1s; }
+.contact-option:nth-child(2) { animation-delay: 0.2s; }
+.contact-option:nth-child(3) { animation-delay: 0.3s; }
+.contact-option:nth-child(4) { animation-delay: 0.4s; }
+.contact-option:nth-child(5) { animation-delay: 0.5s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-page {
+        padding: 6rem 1rem 3rem;
+    }
+    
+    .contact-header h1 {
+        font-size: 2.25rem;
+    }
+    
+    .contact-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .contact-options {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .contact-option {
+        padding: 1.5rem;
+    }
+    
+    .contact-icon {
+        font-size: 2rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    
+    .contact-cta {
+        padding: 2rem;
+    }
+    
+    .cta-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+    
+    .contact-option {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .contact-icon {
+        margin: 0 auto;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .contact-option {
+        animation: none;
+    }
+    
+    .contact-option:hover {
+        transform: none;
+    }
+}

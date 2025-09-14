@@ -157,9 +157,22 @@ GitHub Pages automatically provides SSL certificates for custom domains. Once yo
 - API integrations
 - Automated testing pipeline
 
+## Related Documentation
+
+### Project Documentation
+- [README.md](../README.md) - Complete project overview and setup guide
+- [ANALYTICS.md](ANALYTICS.md) - Google Analytics integration and tracking
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Development guidelines and contribution process
+- [CHANGELOG.md](CHANGELOG.md) - Version history and release notes
+
+### Quick Links
+- **Live Website**: [https://puentescientific.com](https://puentescientific.com)
+- **Repository**: [https://github.com/puentesci/puentesci.github.io](https://github.com/puentesci/puentesci.github.io)
+- **GitHub Pages Settings**: Repository Settings > Pages section
+
 ## Contact Information
 
 For technical support or questions about the deployment:
 - Repository: https://github.com/puentesci/puentesci.github.io
 - Issues: Create an issue in the GitHub repository
-- Documentation: This file and README.md
+- Documentation: Complete guides available in the `docs/` directory
