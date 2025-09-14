@@ -327,9 +327,24 @@ class LoadingAnimation {
             this.loadingScreen.style.display = 'none';
             document.body.classList.add('loaded');
             
+            // Animate the hero title
+            this.animateHeroTitle();
+            
             // Trigger page loaded event
             dispatchCustomEvent('pageLoaded');
         }, 500);
+    }
+
+    animateHeroTitle() {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && !prefersReducedMotion()) {
+            // Add the animation class to trigger the slide-in effect
+            heroTitle.classList.add('animate-title-slide');
+        } else if (heroTitle) {
+            // For reduced motion, just show the title immediately
+            heroTitle.style.opacity = '1';
+            heroTitle.style.transform = 'translateX(0)';
+        }
     }
 }
 
