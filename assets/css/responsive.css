@@ -169,12 +169,16 @@
     }
     
     .footer {
-        padding: var(--space-12) 0 var(--space-6);
+        padding: var(--space-16) 0 var(--space-8);
+    }
+    
+    .footer-content {
+        gap: var(--space-12);
     }
     
     .footer-links {
         grid-template-columns: 1fr;
-        gap: var(--space-6);
+        gap: var(--space-8);
     }
 }
 
@@ -339,11 +343,16 @@
     }
     
     .footer-brand {
-        gap: var(--space-3);
+        gap: var(--space-4);
+        text-align: center;
     }
     
-    .footer-logo {
-        height: 50px;
+    .footer-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .footer-description {
+        font-size: var(--font-size-base);
     }
 }
 
@@ -387,9 +396,8 @@
 /* High DPI Displays */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .nav-logo,
-    .footer-logo {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+    .footer-title {
+        font-size: var(--font-size-lg);
     }
 }
 
