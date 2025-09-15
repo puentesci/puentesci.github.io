@@ -384,27 +384,40 @@ class ScrollIndicatorComponent {
     }
 }
 
-class ThemeToggleComponent {
+class LanguageSelectorComponent {
     constructor() {
-        this.currentTheme = localStorage.getItem('theme') || 'light';
+        this.currentLanguage = localStorage.getItem('language') || 'en';
+        this.languages = {
+            'en': { name: 'English', flag: '🇺🇸' },
+            'es': { name: 'Español', flag: '🇪🇸' },
+            'zh': { name: '中文', flag: '🇨🇳' },
+            'pt': { name: 'Português', flag: '🇵🇹' }
+        };
         this.init();
     }
 
     init() {
-        this.applyTheme(this.currentTheme);
-        this.createToggleButton();
+        console.log('LanguageSelectorComponent initializing...');
+        this.createLanguageSelector();
+        console.log('LanguageSelectorComponent created successfully');
     }
 
-    createToggleButton() {
-        const button = document.createElement('button');
-        button.className = 'theme-toggle';
-        button.setAttribute('aria-label', 'Toggle dark mode');
-        button.innerHTML = this.currentTheme === 'dark' ? '☀️' : '🌙';
-        button.style.cssText = `
+    createLanguageSelector() {
+        const container = document.createElement('div');
+        container.className = 'language-selector';
+        container.style.cssText = `
             position: fixed;
             top: 50%;
             right: 2rem;
             transform: translateY(-50%);
+            z-index: 1000;
+        `;
+
+        const button = document.createElement('button');
+        button.className = 'language-toggle';
+        button.setAttribute('aria-label', 'Select language');
+        button.innerHTML = this.languages[this.currentLanguage].flag;
+        button.style.cssText = `
             width: 3rem;
             height: 3rem;
             border-radius: 50%;
@@ -412,50 +425,147 @@ class ThemeToggleComponent {
             border: 2px solid var(--border-primary);
             font-size: 1.25rem;
             cursor: pointer;
-            z-index: 1000;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         `;
 
-        button.addEventListener('click', () => this.toggleTheme());
-        
+        const dropdown = document.createElement('div');
+        dropdown.className = 'language-dropdown';
+        dropdown.style.cssText = `
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.5rem;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        `;
+
+        // Create language options
+        Object.entries(this.languages).forEach(([code, lang]) => {
+            const option = document.createElement('button');
+            option.className = 'language-option';
+            option.setAttribute('data-lang', code);
+            option.innerHTML = `${lang.flag} ${lang.name}`;
+            option.style.cssText = `
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border: none;
+                background: transparent;
+                color: var(--text-primary);
+                text-align: left;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                border-radius: var(--radius-md);
+                margin: 0.25rem;
+                font-size: 0.875rem;
+            `;
+
+            if (code === this.currentLanguage) {
+                option.style.background = 'var(--accent-primary)';
+                option.style.color = 'white';
+            }
+
+            option.addEventListener('click', () => this.selectLanguage(code));
+            option.addEventListener('mouseenter', () => {
+                if (code !== this.currentLanguage) {
+                    option.style.background = 'var(--bg-secondary)';
+                }
+            });
+            option.addEventListener('mouseleave', () => {
+                if (code !== this.currentLanguage) {
+                    option.style.background = 'transparent';
+                }
+            });
+
+            dropdown.appendChild(option);
+        });
+
+        // Toggle dropdown
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleDropdown();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                this.closeDropdown();
+            }
+        });
+
         // Add hover effect
         button.addEventListener('mouseenter', () => {
-            button.style.transform = 'translateY(-50%) scale(1.1)';
+            button.style.transform = 'scale(1.1)';
         });
         
         button.addEventListener('mouseleave', () => {
-            button.style.transform = 'translateY(-50%) scale(1)';
+            button.style.transform = 'scale(1)';
         });
 
-        document.body.appendChild(button);
-        this.toggleButton = button;
+        container.appendChild(button);
+        container.appendChild(dropdown);
+        document.body.appendChild(container);
+        
+        this.container = container;
+        this.button = button;
+        this.dropdown = dropdown;
     }
 
-    toggleTheme() {
-        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-        this.applyTheme(this.currentTheme);
-        localStorage.setItem('theme', this.currentTheme);
-        
-        if (this.toggleButton) {
-            this.toggleButton.innerHTML = this.currentTheme === 'dark' ? '☀️' : '🌙';
-        }
-    }
-
-    applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        
-        if (theme === 'dark') {
-            document.documentElement.style.setProperty('--bg-primary', '#0f172a');
-            document.documentElement.style.setProperty('--bg-secondary', '#1e293b');
-            document.documentElement.style.setProperty('--text-primary', '#ffffff');
-            document.documentElement.style.setProperty('--text-secondary', '#cbd5e1');
+    toggleDropdown() {
+        const isOpen = this.dropdown.style.opacity === '1';
+        if (isOpen) {
+            this.closeDropdown();
         } else {
-            document.documentElement.style.setProperty('--bg-primary', '#ffffff');
-            document.documentElement.style.setProperty('--bg-secondary', '#f8fafc');
-            document.documentElement.style.setProperty('--text-primary', '#0f172a');
-            document.documentElement.style.setProperty('--text-secondary', '#475569');
+            this.openDropdown();
         }
+    }
+
+    openDropdown() {
+        this.dropdown.style.opacity = '1';
+        this.dropdown.style.visibility = 'visible';
+        this.dropdown.style.transform = 'translateY(0)';
+    }
+
+    closeDropdown() {
+        this.dropdown.style.opacity = '0';
+        this.dropdown.style.visibility = 'hidden';
+        this.dropdown.style.transform = 'translateY(-10px)';
+    }
+
+    selectLanguage(langCode) {
+        this.currentLanguage = langCode;
+        localStorage.setItem('language', langCode);
+        
+        // Update button flag
+        this.button.innerHTML = this.languages[langCode].flag;
+        
+        // Update active option
+        const options = this.dropdown.querySelectorAll('.language-option');
+        options.forEach(option => {
+            if (option.getAttribute('data-lang') === langCode) {
+                option.style.background = 'var(--accent-primary)';
+                option.style.color = 'white';
+            } else {
+                option.style.background = 'transparent';
+                option.style.color = 'var(--text-primary)';
+            }
+        });
+
+        this.closeDropdown();
+        
+        // TODO: Implement actual language switching logic here
+        console.log(`Language changed to: ${this.languages[langCode].name}`);
     }
 }
 
@@ -464,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new NavigationComponent();
     new ContactFormComponent();
     new ScrollIndicatorComponent();
-    new ThemeToggleComponent();
+    new LanguageSelectorComponent();
 });
 
 // Export for module usage
@@ -473,6 +583,6 @@ if (typeof module !== 'undefined' && module.exports) {
         NavigationComponent,
         ContactFormComponent,
         ScrollIndicatorComponent,
-        ThemeToggleComponent
+        LanguageSelectorComponent
     };
 }

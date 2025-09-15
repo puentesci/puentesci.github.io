@@ -143,43 +143,6 @@
     line-height: var(--line-height-relaxed);
 }
 
-/* Floating Cards */
-.floating-card {
-    background: var(--bg-primary);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    position: absolute;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.floating-card[data-float="1"] {
-    animation: floatSlow 4s ease-in-out infinite;
-    top: 20%;
-    right: 10%;
-}
-
-.floating-card[data-float="2"] {
-    animation: floatMedium 3s ease-in-out infinite;
-    top: 60%;
-    right: 20%;
-    animation-delay: -1s;
-}
-
-.floating-card[data-float="3"] {
-    animation: float 3.5s ease-in-out infinite;
-    top: 40%;
-    right: 5%;
-    animation-delay: -2s;
-}
-
-.card-icon {
-    font-size: var(--font-size-xl);
-}
 
 .card-text {
     font-size: var(--font-size-sm);

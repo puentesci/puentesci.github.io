@@ -262,16 +262,15 @@
 
 /* Footer */
 .footer {
-    background: linear-gradient(135deg, 
+    background: linear-gradient(180deg, 
         var(--primary-teal) 0%, 
-        var(--accent-primary) 25%, 
-        var(--primary-teal) 50%, 
-        var(--accent-primary) 75%, 
-        var(--primary-teal) 100%);
+        var(--primary-teal) 15%, 
+        var(--accent-primary) 100%);
     color: var(--text-inverse);
     padding: var(--space-20) 0 var(--space-12);
     position: relative;
     overflow: hidden;
+    min-height: 45vh;
 }
 
 .footer::before {
@@ -294,6 +293,8 @@
     margin-bottom: var(--space-12);
     position: relative;
     z-index: 2;
+    min-height: 35vh;
+    align-content: center;
 }
 
 .footer-brand {
@@ -316,6 +317,65 @@
     line-height: var(--line-height-relaxed);
     font-size: var(--font-size-lg);
     margin: 0;
+}
+
+.desktop-only {
+    display: block;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    position: fixed !important;
+    top: 50% !important;
+    right: 2rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 1000 !important;
+}
+
+.language-toggle {
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 50% !important;
+    background: var(--bg-primary) !important;
+    border: 2px solid var(--border-primary) !important;
+    font-size: 1.25rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-lg) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.language-dropdown {
+    position: absolute !important;
+    right: 0 !important;
+    top: 100% !important;
+    margin-top: 0.5rem !important;
+    background: var(--bg-primary) !important;
+    border: 2px solid var(--border-primary) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    min-width: 150px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s ease !important;
+    z-index: 1001 !important;
+}
+
+.language-option {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    border: none !important;
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    border-radius: var(--radius-md) !important;
+    margin: 0.25rem !important;
+    font-size: 0.875rem !important;
 }
 
 .footer-links {

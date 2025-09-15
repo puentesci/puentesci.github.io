@@ -21,17 +21,6 @@
         font-size: var(--font-size-5xl);
     }
     
-    .floating-card[data-float="1"] {
-        right: 5%;
-    }
-    
-    .floating-card[data-float="2"] {
-        right: 15%;
-    }
-    
-    .floating-card[data-float="3"] {
-        right: 2%;
-    }
 }
 
 /* Tablet (768px to 1023px) */
@@ -56,19 +45,7 @@
         order: -1;
     }
     
-    .floating-card {
-        position: relative;
-        display: inline-flex;
-        margin: var(--space-2);
-        animation: none;
-    }
     
-    .floating-elements {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: var(--space-4);
-    }
     
     .about-content {
         grid-template-columns: 1fr;
@@ -169,11 +146,17 @@
     }
     
     .footer {
-        padding: var(--space-16) 0 var(--space-8);
+        padding: var(--space-12) 0 var(--space-6);
+        min-height: 25vh;
+        background: linear-gradient(180deg, 
+            var(--primary-teal) 0%, 
+            var(--primary-teal) 20%, 
+            var(--accent-primary) 100%);
     }
     
     .footer-content {
-        gap: var(--space-12);
+        gap: var(--space-8);
+        min-height: 20vh;
     }
     
     .footer-links {
@@ -207,14 +190,6 @@
         max-width: 280px;
     }
     
-    .floating-card {
-        padding: var(--space-3);
-        font-size: var(--font-size-sm);
-    }
-    
-    .card-icon {
-        font-size: var(--font-size-lg);
-    }
     
     .section-title {
         font-size: var(--font-size-2xl);
@@ -280,11 +255,6 @@
         height: 250px;
     }
     
-    .floating-card {
-        padding: var(--space-2);
-        font-size: var(--font-size-xs);
-        margin: var(--space-1);
-    }
     
     .section-header {
         margin-bottom: var(--space-12);
@@ -353,6 +323,24 @@
     
     .footer-description {
         font-size: var(--font-size-base);
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .footer {
+        background: linear-gradient(180deg, 
+            var(--primary-teal) 0%, 
+            var(--primary-teal) 25%, 
+            var(--accent-primary) 100%);
+        padding: var(--space-8) 0 var(--space-4);
+        min-height: 20vh;
+    }
+    
+    .footer-content {
+        min-height: 15vh;
+        gap: var(--space-6);
     }
 }
 
@@ -442,7 +430,6 @@
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    .floating-card,
     .rotating-globe,
     .hero-particles,
     .hero-grid,
