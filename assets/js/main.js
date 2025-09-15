@@ -31,8 +31,12 @@ class PuenteScientificApp {
             // Initialize modules
             this.performanceManager.initialize();
             this.accessibilityManager.initialize();
-            await this.analyticsManager.initialize();
             this.eventHandlerManager.initialize();
+            
+            // Initialize analytics in parallel (non-blocking)
+            this.analyticsManager.initialize().catch(error => {
+                console.warn('Analytics initialization failed, continuing without analytics:', error);
+            });
             
             // Mark as initialized
             this.isInitialized = true;

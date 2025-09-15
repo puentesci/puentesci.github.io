@@ -23,18 +23,23 @@ class AnalyticsManager {
         }
     }
 
-    waitForGtag() {
-        return new Promise((resolve) => {
+    waitForGtag(timeoutMs = 5000) {
+        return new Promise((resolve, reject) => {
             if (typeof gtag !== 'undefined') {
                 resolve();
-            } else {
-                const checkGtag = setInterval(() => {
-                    if (typeof gtag !== 'undefined') {
-                        clearInterval(checkGtag);
-                        resolve();
-                    }
-                }, 100);
+                return;
             }
+
+            const startTime = Date.now();
+            const checkGtag = setInterval(() => {
+                if (typeof gtag !== 'undefined') {
+                    clearInterval(checkGtag);
+                    resolve();
+                } else if (Date.now() - startTime > timeoutMs) {
+                    clearInterval(checkGtag);
+                    reject(new Error('Google Analytics failed to load within timeout period'));
+                }
+            }, 100);
         });
     }
 

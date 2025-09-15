@@ -37,7 +37,7 @@
 - ✅ Enhancing styling
 - ✅ Adding new contact methods
 - ❌ Replacing entire file
-- ❌ Changing contact details
+- ❌ Changing contact details unless requested
 
 ### **3. privacy-policy.html**
 **Risk Level:** 🟡 **MODERATE**
