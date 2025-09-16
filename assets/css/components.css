@@ -220,7 +220,7 @@
     font-family: var(--font-heading);
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
-    color: var(--primary-dark) !important;
+    color: var(--primary-teal-bright) !important;
     margin-bottom: var(--space-4);
     position: relative;
 }
@@ -232,7 +232,7 @@
     left: 50%;
     width: 60px;
     height: 4px;
-    background: var(--primary-teal);
+    background: var(--primary-teal-bright);
     border-radius: var(--radius-full);
     transform: translateX(-50%);
 }

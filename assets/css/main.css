@@ -39,6 +39,36 @@
     color: var(--text-primary);
 }
 
+.nav-title {
+    font-family: var(--font-cursive);
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--primary-teal);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-title:hover {
+    transform: rotate(0deg) scale(1.05);
+    color: var(--primary-teal-bright);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.nav-title:visited {
+    color: var(--primary-teal);
+}
+
+.nav-title:focus {
+    outline: 2px solid var(--primary-teal-bright);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 .nav-logo {
     height: 40px;
     width: auto;
@@ -187,7 +217,7 @@
 .hero-title,
 .section-title,
 .about-text h3 {
-    color: var(--primary-dark) !important;
+    color: var(--primary-teal-bright) !important;
 }
 
 /* Hero Section */
@@ -238,9 +268,160 @@
     padding: 0 var(--container-padding);
     width: 100%;
 }
+.products-page .hero {
+    background: linear-gradient(180deg, #020617 0%, #0b1220 100%);
+}
+/* Particle background removed - no longer needed */
+
+
+.products-page .hero-title.holo-final-text {
+    opacity: 0;
+    transform: none;
+    text-align: center;
+    width: 100%;
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    background: linear-gradient(135deg, 
+        rgba(0, 224, 255, 0.9) 0%, 
+        rgba(30, 144, 255, 0.85) 30%, 
+        rgba(100, 200, 255, 0.8) 60%, 
+        rgba(255, 255, 255, 0.95) 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    
+    /* Fallback for browsers that don't support background-clip: text */
+    @supports not (background-clip: text) {
+        color: #00e0ff !important;
+        background: none;
+    }
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 20px rgba(0, 224, 255, 0.2), 0 0 40px rgba(30, 144, 255, 0.15);
+    filter: saturate(1.2) brightness(1.15) contrast(1.1);
+    animation: holoColorShift 8s ease-in-out infinite;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: clamp(1.5rem, 4vw, 3.5rem);
+    word-wrap: break-word;
+    word-break: keep-all;
+    hyphens: none;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    orphans: 2;
+    widows: 2;
+    /* Prevent awkward word breaks */
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+/* Particle container removed - no longer needed */
+
+/* Equipment List Styling */
+.products-page .equipment-list {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeInEquipment 1.5s ease-out 1s forwards;
+}
+
+.products-page .equipment-item {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: rgba(0, 224, 255, 0.6);
+    text-align: right;
+    padding: 0.5rem 1rem;
+    border-right: 2px solid rgba(0, 224, 255, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.products-page .equipment-item:hover {
+    color: rgba(0, 224, 255, 0.9);
+    border-right-color: rgba(0, 224, 255, 0.7);
+    transform: translateX(-10px);
+}
+
+.products-page .equipment-item::before {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 224, 255, 0.4);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.products-page .equipment-item:hover::before {
+    background: rgba(0, 224, 255, 0.8);
+    transform: translateY(-50%) scale(1.2);
+}
+
+@keyframes fadeInEquipment {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.products-page .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Ensure the hero section itself is perfectly centered */
+.products-page .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 
 .hero-text {
     /* Animation will be applied to individual elements */
+    position: relative;
 }
 
 .hero-title {
@@ -248,7 +429,7 @@
     font-size: var(--font-size-6xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
-    color: var(--primary-dark) !important;
+    color: var(--primary-teal-bright) !important;
     margin-bottom: var(--space-6);
     opacity: 0;
     transform: translateX(-100px);

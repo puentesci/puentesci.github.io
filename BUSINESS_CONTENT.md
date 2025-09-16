@@ -49,7 +49,7 @@
 **Subtitle:** "We specialize in emerging technologies and high-quality refurbished equipment, helping laboratories and companies upgrade or maintain their operations with cost-effective, reliable solutions."
 
 ### **About Section:**
-""
+"We refurbish and resell HPLC equipment, source hard-to-find parts, and connect suppliers with global markets from our Alabama base. Our mission is to expand worldwide access to essential lab technology through cost-effective, refurbished solutions."
 
 ---
 
@@ -58,9 +58,10 @@
 **Required Navigation Items:**
 1. Home
 2. About
-3. Services
-4. Products
-5. Contact
+3. Products
+4. Contact
+
+**Note:** Services tab has been removed as requested
 
 ---
 
@@ -68,8 +69,9 @@
 
 ### **Primary Contact:**
 - **Email:** info@puentescientific.com
-- **Phone:** +1 (205) 256-5953
-- **Address:**  1941 Hoover CT, Birmingham, Alabama 
+- **Phone:** 1 (205) 256-5953
+- **Address:** 1941 Hoover CT, Hoover, AL 35226
+- **D-U-N-S Number:** 14-068-8697 (Verify with Dun & Bradstreet) 
 
 ### **Social Media:**
 - LinkedIn: Puente Scientific LLC -

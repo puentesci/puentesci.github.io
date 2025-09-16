@@ -76,6 +76,15 @@ class AnimationController {
         const numberElement = statItem.querySelector('.stat-number');
         if (!numberElement || numberElement.dataset.animated) return;
 
+        // Special handling for the 2025 year - don't count up, just show 2025 immediately
+        if (numberElement.classList.contains('year-2025')) {
+            numberElement.dataset.animated = 'true';
+            numberElement.textContent = '2025';
+            this.animateYear2025(numberElement);
+            return;
+        }
+
+        // Regular counting animation for other stats
         const targetValue = parseInt(numberElement.dataset.count) || 0;
         const suffix = numberElement.textContent.replace(/\d/g, '');
         
@@ -93,6 +102,15 @@ class AnimationController {
                 icon.style.animation = '';
             }, 600);
         }
+    }
+
+    animateYear2025(yearElement) {
+        if (this.isReducedMotion) return;
+
+        // Start the wiggle animation immediately since we're not counting up
+        setTimeout(() => {
+            yearElement.classList.add('animate-year-wiggle');
+        }, 500); // Small delay to let the element settle
     }
 
     setupScrollAnimations() {
@@ -610,6 +628,12 @@ class LoadingAnimation {
     animateHeroTitle() {
         const heroTitle = document.querySelector('.hero-title');
         if (heroTitle && !prefersReducedMotion()) {
+            // Skip default entrance if explicitly disabled (e.g., products holographic title)
+            if (heroTitle.hasAttribute('data-disable-entrance')) {
+                heroTitle.style.opacity = heroTitle.style.opacity || '0';
+                heroTitle.style.transform = 'none';
+                return;
+            }
             // Add the animation class to trigger the slide-in effect
             heroTitle.classList.add('animate-title-slide');
         } else if (heroTitle) {

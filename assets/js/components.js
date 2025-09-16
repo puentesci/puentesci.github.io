@@ -79,7 +79,12 @@ class NavigationComponent {
 
     setupActiveLink() {
         const sections = document.querySelectorAll('section[id]');
-        
+
+        if (!sections.length) {
+            this.setActiveLinkByFallback();
+            return;
+        }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -102,21 +107,53 @@ class NavigationComponent {
         });
     }
 
+    setActiveLinkByFallback() {
+        const currentPath = (window.location.pathname || '/').replace(/\/$/, '') || '/';
+
+        this.navLinks.forEach(link => {
+            link.classList.remove('active');
+
+            const fallback = link.dataset.fallback;
+            if (!fallback) {
+                return;
+            }
+
+            try {
+                const fallbackUrl = new URL(fallback, window.location.origin);
+                const fallbackPath = fallbackUrl.pathname.replace(/\/$/, '') || '/';
+
+                if (fallbackPath === currentPath) {
+                    link.classList.add('active');
+                }
+            } catch (error) {
+                console.warn('Invalid fallback URL:', fallback, error);
+            }
+        });
+    }
+
     setupSmoothScroll() {
         this.navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
+                const href = link.getAttribute('href') || '';
+
+                if (!href.startsWith('#')) {
+                    return;
+                }
+
+                const targetElement = document.querySelector(href);
+
                 if (targetElement) {
-                    const headerHeight = this.navbar.offsetHeight;
+                    e.preventDefault();
+                    const headerHeight = this.navbar?.offsetHeight || 0;
                     smoothScrollTo(targetElement, headerHeight);
-                    
+
                     // Close mobile menu if open
                     if (this.isMenuOpen) {
                         this.closeMobileMenu();
                     }
+                } else if (link.dataset.fallback) {
+                    e.preventDefault();
+                    window.location.href = link.dataset.fallback;
                 }
             });
         });
@@ -704,16 +741,6 @@ class LanguageSelectorComponent {
                 }
             },
             {
-                selectors: '#contact .section-subtitle',
-                type: 'text',
-                values: {
-                    en: 'Ready to expand your business globally?',
-                    es: '¿Listo para expandir su negocio globalmente?',
-                    zh: '准备好将您的业务拓展到全球了吗？',
-                    pt: 'Pronto para expandir seu negócio globalmente?'
-                }
-            },
-            {
                 selectors: '#contact .contact-item:nth-child(1) h4',
                 type: 'text',
                 values: {
@@ -737,20 +764,20 @@ class LanguageSelectorComponent {
                 selectors: '#contact .contact-item:nth-child(3) h4',
                 type: 'text',
                 values: {
-                    en: 'Global Presence',
-                    es: 'Presencia Global',
-                    zh: '全球布局',
-                    pt: 'Presença Global'
+                    en: 'Reach Emerging Markets',
+                    es: 'Alcanzar Mercados Emergentes',
+                    zh: '进入新兴市场',
+                    pt: 'Alcançar Mercados Emergentes'
                 }
             },
             {
                 selectors: '#contact .contact-item:nth-child(3) .contact-details p',
                 type: 'text',
                 values: {
-                    en: 'Serving clients worldwide',
-                    es: 'Atendemos clientes en todo el mundo',
-                    zh: '服务全球客户',
-                    pt: 'Atendendo clientes em todo o mundo'
+                    en: 'Your inventory can reach further',
+                    es: 'Tu inventario puede llegar más lejos',
+                    zh: '您的库存可以走得更远',
+                    pt: 'Seu estoque pode chegar mais longe'
                 }
             },
             {

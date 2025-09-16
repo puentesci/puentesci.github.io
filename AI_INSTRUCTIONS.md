@@ -20,8 +20,9 @@
 
 ### **Navigation Menu (index.html)**
 **MUST INCLUDE:**
-- Home, About, Services, **Products**, Contact
+- Home, About, **Products**, Contact
 - The "Products" link is essential and was accidentally removed before
+- Note: Services tab has been removed as requested
 
 ---
 
@@ -68,7 +69,7 @@
 1. **Replacing entire HTML files** without checking business content
 2. **Changing statistics** without explicit permission
 3. **Modifying hero titles/subtitles** without preserving business focus
-4. **Removing navigation items** (especially "Products")
+4. **Removing navigation items** (especially "Products") - Note: Services tab was intentionally removed
 5. **Overwriting contact information** with generic placeholders
 6. **Changing business descriptions** to generic export company language
 
