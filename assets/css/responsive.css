@@ -411,7 +411,7 @@
     
     .section-title,
     .hero-title {
-        color: var(--black) !important;
+        color: var(--primary-dark) !important;
     }
     
     .btn {
@@ -475,5 +475,23 @@
     .contact-item,
     .card {
         border: 2px solid var(--black) !important;
+    }
+}
+
+/* Language Selector Responsive Styles */
+@media (max-width: 768px) {
+    .language-selector-nav {
+        flex-direction: column;
+        gap: var(--space-1);
+    }
+    
+    .language-label {
+        font-size: var(--font-size-xs);
+    }
+    
+    .language-select {
+        min-width: 100px;
+        font-size: var(--font-size-xs);
+        padding: var(--space-1) var(--space-2);
     }
 }

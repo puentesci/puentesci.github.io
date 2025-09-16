@@ -220,7 +220,7 @@
     font-family: var(--font-heading);
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
-    color: var(--text-primary);
+    color: var(--primary-dark);
     margin-bottom: var(--space-4);
     position: relative;
 }

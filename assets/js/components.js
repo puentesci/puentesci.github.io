@@ -1151,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new NavigationComponent();
     new ContactFormComponent();
     new ScrollIndicatorComponent();
-    new LanguageSelectorComponent();
+    // new LanguageSelectorComponent(); // Disabled - using new nav-based selector
 });
 
 // Export for module usage
