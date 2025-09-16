@@ -42,6 +42,15 @@
 .nav-logo {
     height: 40px;
     width: auto;
+    filter: brightness(1.1) contrast(1.05);
+    transition: all var(--transition-normal);
+    border-radius: var(--radius-sm);
+    padding: 2px;
+}
+
+.nav-logo:hover {
+    filter: brightness(1.2) contrast(1.1);
+    transform: scale(1.05);
 }
 
 .nav-menu {
@@ -174,6 +183,13 @@
     transition: all var(--transition-normal);
 }
 
+/* Ensure all main titles use consistent color */
+.hero-title,
+.section-title,
+.about-text h3 {
+    color: var(--primary-dark) !important;
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -181,7 +197,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background: var(--bg-primary);
 }
 
 .hero-background {
@@ -197,10 +213,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(45, 139, 139, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 60%, rgba(45, 139, 139, 0.05) 0%, transparent 50%);
+    background: rgba(55, 137, 54, 0.08);
     animation: float 20s ease-in-out infinite;
 }
 
@@ -208,9 +221,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: 
-        linear-gradient(rgba(45, 139, 139, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(45, 139, 139, 0.1) 1px, transparent 1px);
+    background: rgba(0, 33, 71, 0.12);
     background-size: 50px 50px;
     animation: gridPulse 4s ease-in-out infinite;
 }
@@ -237,7 +248,7 @@
     font-size: var(--font-size-6xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
-    color: var(--primary-dark);
+    color: var(--primary-dark) !important;
     margin-bottom: var(--space-6);
     opacity: 0;
     transform: translateX(-100px);
@@ -249,7 +260,7 @@
 }
 
 .title-line {
-    color: var(--primary-dark);
+    color: var(--primary-dark) !important;
 }
 
 .hero-subtitle {
@@ -295,7 +306,7 @@
     font-family: var(--font-heading);
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--primary-dark);
+    color: var(--primary-dark) !important;
     margin-bottom: var(--space-4);
 }
 
@@ -322,7 +333,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-primary));
+    background: var(--primary-teal);
     position: relative;
     animation: pulse 2s ease-in-out infinite;
     box-shadow: var(--shadow-xl);
@@ -371,10 +382,7 @@
 
 /* Footer */
 .footer {
-    background: linear-gradient(180deg, 
-        var(--primary-teal) 0%, 
-        var(--primary-teal) 15%, 
-        var(--accent-primary) 100%);
+    background: linear-gradient(180deg, var(--primary-teal) 0%, var(--gray-900) 100%);
     color: var(--text-inverse);
     padding: var(--space-20) 0 var(--space-12);
     position: relative;
@@ -389,15 +397,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    background: rgba(255, 255, 255, 0.03);
     z-index: 1;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr auto;
     gap: var(--space-20);
     margin-bottom: var(--space-12);
     position: relative;
@@ -426,6 +432,24 @@
     line-height: var(--line-height-relaxed);
     font-size: var(--font-size-lg);
     margin: 0;
+}
+
+.footer-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(1.2) contrast(1.1);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-normal);
+}
+
+.footer-logo:hover {
+    filter: brightness(1.4) contrast(1.2);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .desktop-only {
@@ -501,6 +525,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-12);
+    justify-self: end;
+    text-align: right;
 }
 
 .footer-section h4 {
@@ -640,7 +666,7 @@
     position: relative;
     width: 100%;
     height: 200px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    background: var(--bg-secondary);
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--border-primary);
     overflow: hidden;
@@ -648,7 +674,7 @@
 }
 
 [data-theme="dark"] .chart-container {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+    background: var(--gray-800);
     border-color: var(--border-primary);
 }
 
@@ -666,7 +692,7 @@
 
 .grid-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--border-primary) 80%, transparent 100%);
+    background: var(--border-primary);
     opacity: 0.3;
 }
 
@@ -683,7 +709,7 @@
     position: absolute;
     width: 12px;
     height: 12px;
-    background: var(--color-primary);
+    background: var(--primary-teal);
     border: 3px solid var(--bg-primary);
     border-radius: 50%;
     transform: translate(-50%, 50%);
@@ -698,7 +724,7 @@
 }
 
 .data-point.active {
-    background: var(--color-accent);
+    background: var(--accent-primary);
     animation: pulse 2s infinite;
 }
 
@@ -743,7 +769,7 @@
     left: 10%;
     right: 10%;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    background: var(--primary-teal);
     transform: translateY(-50%);
     border-radius: 1px;
     opacity: 0.7;
@@ -751,10 +777,10 @@
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+        box-shadow: 0 0 0 0 rgba(0, 166, 81, 0.6);
     }
     50% {
-        box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+        box-shadow: 0 0 0 10px rgba(0, 166, 81, 0);
     }
 }
 

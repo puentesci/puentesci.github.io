@@ -33,7 +33,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: rgba(255, 255, 255, 0.15);
     transition: left var(--transition-slow);
 }
 
@@ -42,7 +42,7 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-primary));
+    background: var(--primary-teal);
     color: var(--text-inverse);
     box-shadow: var(--shadow-md);
 }
@@ -50,7 +50,7 @@
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-xl);
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-teal));
+    background: var(--primary-dark);
 }
 
 .btn-secondary {
@@ -109,7 +109,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-teal), var(--accent-primary));
+    background: var(--accent-primary);
     transform: scaleX(0);
     transition: transform var(--transition-normal);
 }
@@ -220,7 +220,7 @@
     font-family: var(--font-heading);
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
-    color: var(--primary-dark);
+    color: var(--primary-dark) !important;
     margin-bottom: var(--space-4);
     position: relative;
 }
@@ -232,7 +232,7 @@
     left: 50%;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary-teal), var(--accent-primary));
+    background: var(--primary-teal);
     border-radius: var(--radius-full);
     transform: translateX(-50%);
 }
@@ -315,7 +315,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--gray-50) 100%);
+    background: var(--bg-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -331,7 +331,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(40, 171, 255, 0.1) 0%, transparent 70%);
+    background: rgba(55, 137, 54, 0.1);
     animation: rotateBackground 8s linear infinite;
     z-index: -1;
 }
@@ -359,10 +359,9 @@
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    border: 2px solid transparent;
+    border: 2px solid rgba(0, 166, 81, 0.4);
     border-radius: 50%;
-    background: linear-gradient(#0000, #0000) padding-box,
-                linear-gradient(45deg, #7CC7FF, #B3DDFF, #7CC7FF) border-box;
+    background: transparent;
     animation: spinRing 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     opacity: 0.1;
     z-index: -1;
@@ -375,7 +374,7 @@
     height: 280px;
     object-fit: contain;
     animation: logoEntrance 2s ease-out forwards;
-    filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
+    filter: drop-shadow(0 0 20px rgba(0, 166, 81, 0.3));
     position: relative;
     z-index: 10;
 }
@@ -410,19 +409,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        transparent 100%);
+    background: rgba(255, 255, 255, 0.3);
     animation: shimmer 1.5s ease-in-out infinite;
 }
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, 
-        var(--primary-teal) 0%, 
-        var(--accent-primary) 50%, 
-        var(--primary-teal) 100%);
+    background: var(--primary-teal);
     border-radius: var(--radius-full);
     animation: progressLoad 2s ease-in forwards;
     position: relative;
@@ -436,10 +429,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.4) 50%, 
-        transparent 100%);
+    background: rgba(255, 255, 255, 0.4);
     animation: progressShine 2s ease-out forwards;
 }
 

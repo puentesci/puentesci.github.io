@@ -488,7 +488,7 @@ class LanguageSelectorComponent {
                 type: 'html',
                 values: {
                     en: '<span class="title-line">Bridging Science</span><span class="title-line">&</span><span class="title-line">Tech Trade</span>',
-                    es: '<span class="title-line">Conectando Ciencia</span><span class="title-line">y</span><span class="title-line">Comercio Tecnológico</span>',
+                    es: '<span class="title-line">Conectando La Ciencia y El Comercio Tecnológico</span>',
                     zh: '<span class="title-line">连接科学</span><span class="title-line">与</span><span class="title-line">科技贸易</span>',
                     pt: '<span class="title-line">Conectando Ciência</span><span class="title-line">e</span><span class="title-line">Comércio Tecnológico</span>'
                 }

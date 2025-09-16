@@ -9,7 +9,7 @@
 
 /* Legal Hero Section */
 .legal-hero {
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background: var(--bg-primary);
     padding: var(--space-20) 0 var(--space-16);
     position: relative;
     overflow: hidden;
@@ -22,9 +22,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(45, 139, 139, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
+    background: rgba(55, 137, 54, 0.08);
     z-index: 1;
 }
 
@@ -113,7 +111,7 @@
     transform: translateY(-50%);
     width: 4px;
     height: 24px;
-    background: linear-gradient(135deg, var(--primary-teal), var(--accent-primary));
+    background: var(--primary-teal);
     border-radius: var(--radius-sm);
 }
 

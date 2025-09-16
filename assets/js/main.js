@@ -237,7 +237,7 @@ class PuenteScientificApp {
                 'nav-services': 'Servicios',
                 'nav-products': 'Productos',
                 'nav-contact': 'Contacto',
-                'hero-title': 'Conectando Ciencia y Comercio Tecnológico',
+                'hero-title': 'Conectando La Ciencia y El Comercio Tecnológico',
                 'hero-subtitle': 'Nos especializamos en tecnologías emergentes y equipos reacondicionados de alta calidad, ayudando a laboratorios y empresas a actualizar o mantener sus operaciones con soluciones confiables y rentables.',
                 'about-title': 'Acerca de Puente Scientific',
                 'about-subtitle': 'Dando una Segunda Vida al Equipo de Laboratorio',
