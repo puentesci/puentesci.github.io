@@ -50,6 +50,73 @@
     gap: var(--space-2);
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.theme-toggle {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: var(--border-primary);
+    border: none;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.theme-toggle:hover {
+    background: var(--border-secondary);
+    transform: scale(1.05);
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: var(--bg-primary);
+    border-radius: 50%;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    left: 2px;
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(24px);
+    background: var(--color-accent);
+}
+
+.theme-icon {
+    position: absolute;
+    font-size: 12px;
+    transition: all var(--transition-normal);
+    pointer-events: none;
+}
+
+.sun-icon {
+    left: 6px;
+    opacity: 1;
+}
+
+.moon-icon {
+    right: 6px;
+    opacity: 0;
+}
+
+[data-theme="dark"] .sun-icon {
+    opacity: 0;
+}
+
+[data-theme="dark"] .moon-icon {
+    opacity: 1;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -378,6 +445,16 @@
     font-size: 0.875rem !important;
 }
 
+.language-option.active {
+    background: var(--accent-primary) !important;
+    color: var(--white) !important;
+}
+
+.language-option:not(.active):hover,
+.language-option:not(.active):focus {
+    background: var(--bg-secondary) !important;
+}
+
 .footer-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -458,6 +535,28 @@
         visibility: visible;
     }
     
+    .nav-controls {
+        gap: var(--space-2);
+    }
+    
+    .theme-toggle {
+        width: 44px;
+        height: 24px;
+    }
+    
+    .theme-toggle::before {
+        width: 20px;
+        height: 20px;
+    }
+    
+    [data-theme="dark"] .theme-toggle::before {
+        transform: translateX(20px);
+    }
+    
+    .theme-icon {
+        font-size: 10px;
+    }
+    
     .nav-toggle {
         display: flex;
     }
@@ -472,5 +571,168 @@
     
     .nav-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* Growth Chart Styles */
+.growth-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+}
+
+.growth-chart h4 {
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-6);
+    text-align: center;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-primary);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+[data-theme="dark"] .chart-container {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+    border-color: var(--border-primary);
+}
+
+.chart-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-4);
+}
+
+.grid-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border-primary) 20%, var(--border-primary) 80%, transparent 100%);
+    opacity: 0.3;
+}
+
+.chart-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: var(--space-4);
+}
+
+.data-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border: 3px solid var(--bg-primary);
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.data-point:hover {
+    transform: translate(-50%, 50%) scale(1.2);
+    box-shadow: var(--shadow-lg);
+}
+
+.data-point.active {
+    background: var(--color-accent);
+    animation: pulse 2s infinite;
+}
+
+.point-value {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.data-point:hover .point-value {
+    opacity: 1;
+}
+
+.chart-labels {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Connect data points with lines */
+.chart-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    transform: translateY(-50%);
+    border-radius: 1px;
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+    }
+}
+
+/* Responsive adjustments for chart */
+@media (max-width: 768px) {
+    .growth-chart {
+        padding: var(--space-4);
+    }
+    
+    .chart-container {
+        height: 150px;
+    }
+    
+    .growth-chart h4 {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--space-4);
+    }
+    
+    .point-value {
+        font-size: 10px;
+        top: -30px;
     }
 }

@@ -276,6 +276,56 @@ function formatDate(date, options = {}) {
     return new Intl.DateTimeFormat('en-US', formatOptions).format(dateObj);
 }
 
+/**
+ * Safely read from localStorage without breaking in private browsing or restricted modes
+ * @param {string} key - Storage key
+ * @param {*} fallback - Value to return if storage is unavailable
+ * @returns {*} Stored value or fallback
+ */
+let storageWarningShown = false;
+
+function logStorageWarning(action, key, error) {
+    if (!storageWarningShown) {
+        console.warn(`Storage ${action} failed for "${key}"`, error);
+        storageWarningShown = true;
+    }
+}
+
+function safeStorageGet(key, fallback = null) {
+    try {
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : value;
+    } catch (error) {
+        logStorageWarning('read', key, error);
+        return fallback;
+    }
+}
+
+/**
+ * Safely write to localStorage without throwing when storage is unavailable
+ * @param {string} key - Storage key
+ * @param {*} value - Value to persist
+ */
+function safeStorageSet(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (error) {
+        logStorageWarning('write', key, error);
+    }
+}
+
+/**
+ * Safely remove a localStorage key
+ * @param {string} key - Storage key to remove
+ */
+function safeStorageRemove(key) {
+    try {
+        localStorage.removeItem(key);
+    } catch (error) {
+        logStorageWarning('remove', key, error);
+    }
+}
+
 // Export functions for module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -294,6 +344,9 @@ if (typeof module !== 'undefined' && module.exports) {
         lazyLoadImages,
         generateUniqueId,
         copyToClipboard,
-        formatDate
+        formatDate,
+        safeStorageGet,
+        safeStorageSet,
+        safeStorageRemove
     };
 }

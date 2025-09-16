@@ -22,7 +22,6 @@
 - Laboratories
 - Companies needing equipment upgrades
 - Organizations seeking cost-effective technology solutions
-- International businesses requiring export services
 
 ---
 
@@ -50,7 +49,7 @@
 **Subtitle:** "We specialize in emerging technologies and high-quality refurbished equipment, helping laboratories and companies upgrade or maintain their operations with cost-effective, reliable solutions."
 
 ### **About Section:**
-"With years of experience in international trade, Puente Scientific has established itself as a trusted partner for businesses looking to expand their global reach. We specialize in comprehensive export solutions that ensure your products reach international markets efficiently and safely."
+""
 
 ---
 
@@ -60,7 +59,7 @@
 1. Home
 2. About
 3. Services
-4. **Products** (Critical - was accidentally removed before)
+4. Products
 5. Contact
 
 ---
@@ -69,13 +68,13 @@
 
 ### **Primary Contact:**
 - **Email:** info@puentescientific.com
-- **Phone:** +1 (555) 123-4567 (placeholder - update with real number)
-- **Address:** 123 Export Boulevard, International Trade Center, Miami, FL 33101
+- **Phone:** +1 (205) 256-5953
+- **Address:**  1941 Hoover CT, Birmingham, Alabama 
 
 ### **Social Media:**
-- LinkedIn: Puente Scientific LLC
-- Instagram: @puentescientific
-- Twitter/X: @PuenteSci
+- LinkedIn: Puente Scientific LLC -
+- Instagram: @puentescientific -
+- Twitter/X: @PuenteSci - 
 
 ---
 
@@ -91,7 +90,6 @@
 ### **Competitive Advantages:**
 - Focus on emerging technologies
 - Specialization in refurbished equipment
-- International trade expertise
 - Cost-effective solutions
 - Modern, tech-forward approach
 
