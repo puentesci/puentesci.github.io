@@ -137,8 +137,10 @@ class PuenteScientificApp {
         this.setTheme(initialTheme);
         themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
 
-        // Add click event listener
-        themeToggle.addEventListener('click', () => {
+        // Add event listeners for both click and touch
+        const handleThemeToggle = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             this.setTheme(newTheme);
@@ -158,7 +160,10 @@ class PuenteScientificApp {
                     previous_theme: currentTheme
                 });
             }
-        });
+        };
+
+        themeToggle.addEventListener('click', handleThemeToggle);
+        themeToggle.addEventListener('touchstart', handleThemeToggle);
 
         // Listen for system theme changes
         const handleSystemThemeChange = (event) => {
