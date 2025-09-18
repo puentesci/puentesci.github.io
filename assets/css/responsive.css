@@ -94,9 +94,20 @@
     }
     
     .footer-content {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-        text-align: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: var(--space-6);
+        text-align: left;
+    }
+    
+    .footer-brand {
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .footer-brand .footer-links {
+        justify-content: flex-start;
+        margin-top: var(--space-2);
     }
     
     .services-grid {
@@ -126,7 +137,7 @@
     }
     
     .nav-logo {
-        height: 35px;
+        height: 42px;
     }
     
     .hero {
@@ -185,19 +196,29 @@
     }
     
     .footer {
-        padding: var(--space-12) 0 var(--space-6);
-        min-height: 25vh;
+        padding: var(--space-8) 0 var(--space-4);
         background: var(--gray-800);
     }
     
     .footer-content {
-        gap: var(--space-8);
-        min-height: 20vh;
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: left;
     }
     
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
+    .footer-brand {
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .footer-brand .footer-links {
+        justify-content: flex-start;
+        margin-top: var(--space-2);
+        gap: var(--space-4);
+    }
+    
+    .footer-brand .footer-links ul {
+        gap: var(--space-4);
     }
 }
 
@@ -307,7 +328,7 @@
     }
     
     .nav-logo {
-        height: 30px;
+        height: 36px;
     }
     
     .hero-title {
@@ -425,13 +446,28 @@
     
     .footer {
         background: var(--gray-800);
-        padding: var(--space-8) 0 var(--space-4);
-        min-height: 20vh;
+        padding: var(--space-6) 0 var(--space-3);
     }
     
     .footer-content {
-        min-height: 15vh;
-        gap: var(--space-6);
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: left;
+    }
+    
+    .footer-brand {
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .footer-brand .footer-links {
+        justify-content: flex-start;
+        margin-top: var(--space-2);
+        gap: var(--space-3);
+    }
+    
+    .footer-brand .footer-links ul {
+        gap: var(--space-3);
     }
 }
 

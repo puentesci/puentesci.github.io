@@ -731,13 +731,13 @@ class LanguageSelectorComponent {
                 }
             },
             {
-                selectors: '#contact .section-title',
+                selectors: '.contact-title',
                 type: 'text',
                 values: {
-                    en: 'Get In Touch',
-                    es: 'Póngase en Contacto',
-                    zh: '取得联系',
-                    pt: 'Entre em Contato'
+                    en: 'Let\'s Connect',
+                    es: 'Conectémonos',
+                    zh: '让我们联系',
+                    pt: 'Vamos Conectar'
                 }
             },
             {

@@ -248,7 +248,8 @@ class PuenteScientificApp {
                 'cta-title': 'Need Something Specific?',
                 'cta-description': 'Contact us to discuss your equipment needs or to be notified when our inventory system goes live.',
                 'cta-contact': 'Contact Us',
-                'cta-learn': 'Learn More'
+                'cta-learn': 'Learn More',
+                'contact-title': 'Let\'s Connect'
             },
             es: {
                 'nav-home': 'Inicio',
@@ -279,7 +280,8 @@ class PuenteScientificApp {
                 'cta-title': '¿Necesitas Algo Específico?',
                 'cta-description': 'Contáctanos para discutir tus necesidades de equipos o para ser notificado cuando nuestro sistema de inventario esté disponible.',
                 'cta-contact': 'Contáctanos',
-                'cta-learn': 'Saber Más'
+                'cta-learn': 'Saber Más',
+                'contact-title': 'Conectémonos'
             },
             zh: {
                 'nav-home': '首页',
@@ -310,7 +312,8 @@ class PuenteScientificApp {
                 'cta-title': '需要特定产品？',
                 'cta-description': '联系我们讨论您的设备需求，或在我们的库存系统上线时收到通知。',
                 'cta-contact': '联系我们',
-                'cta-learn': '了解更多'
+                'cta-learn': '了解更多',
+                'contact-title': '让我们联系'
             },
             pt: {
                 'nav-home': 'Início',
@@ -341,7 +344,8 @@ class PuenteScientificApp {
                 'cta-title': 'Precisa de Algo Específico?',
                 'cta-description': 'Entre em contato conosco para discutir suas necessidades de equipamentos ou para ser notificado quando nosso sistema de inventário estiver ativo.',
                 'cta-contact': 'Entre em Contato',
-                'cta-learn': 'Saiba Mais'
+                'cta-learn': 'Saiba Mais',
+                'contact-title': 'Vamos Conectar'
             }
         };
 
