@@ -326,8 +326,6 @@ class LoadingAnimation {
             fonts: 10
         };
         this.networkInfo = this.getNetworkInfo();
-        this.loadingMessages = this.getLoadingMessages();
-        this.currentMessageIndex = 0;
     }
 
     getMinLoadingTime() {
@@ -354,27 +352,12 @@ class LoadingAnimation {
         return null;
     }
 
-    getLoadingMessages() {
-        const messages = [
-            "Loading Puente Scientific...",
-            "Preparing your experience...",
-            "Almost ready..."
-        ];
-        
-        // Add network-specific messages
-        if (this.networkInfo && this.networkInfo.effectiveType === 'slow-2g') {
-            messages.splice(1, 0, "Optimizing for your connection...");
-        }
-        
-        return messages;
-    }
 
     start() {
         if (!this.loadingScreen) return Promise.resolve();
 
         return new Promise((resolve) => {
             this.setupResourceTracking();
-            this.setupLoadingMessages();
             this.updateProgress();
             
             // Ensure minimum loading time for smooth UX
@@ -393,28 +376,6 @@ class LoadingAnimation {
         });
     }
 
-    setupLoadingMessages() {
-        const messageElement = this.loadingScreen.querySelector('.loading-message');
-        if (!messageElement) return;
-
-        // Show first message immediately
-        messageElement.textContent = this.loadingMessages[0];
-        
-        // Update messages based on progress
-        const messageInterval = setInterval(() => {
-            if (this.isComplete) {
-                clearInterval(messageInterval);
-                return;
-            }
-            
-            this.currentMessageIndex = Math.min(
-                this.currentMessageIndex + 1,
-                this.loadingMessages.length - 1
-            );
-            
-            messageElement.textContent = this.loadingMessages[this.currentMessageIndex];
-        }, this.minLoadingTime / this.loadingMessages.length);
-    }
 
     setupResourceTracking() {
         // Track DOM loading
@@ -567,34 +528,13 @@ class LoadingAnimation {
             (this.resourceProgress.fonts * this.resourceWeights.fonts / 100);
 
         if (this.progressBar) {
-            this.progressBar.style.width = `${Math.min(totalProgress, 100)}%`;
-            
-            // Add smooth transition effect
-            this.progressBar.style.transition = 'width 0.3s ease-out';
+            const clamped = Math.min(totalProgress, 100);
+            // Use transform for GPU-accelerated, layout-safe updates
+            this.progressBar.style.transform = `scaleX(${clamped / 100})`;
         }
 
-        // Update loading message based on progress
-        this.updateLoadingMessage(totalProgress);
     }
 
-    updateLoadingMessage(progress) {
-        const messageElement = this.loadingScreen.querySelector('.loading-message');
-        if (!messageElement) return;
-
-        let message = this.loadingMessages[0];
-        
-        if (progress >= 25 && progress < 50) {
-            message = this.loadingMessages[1];
-        } else if (progress >= 50 && progress < 75) {
-            message = this.loadingMessages[2];
-        } else if (progress >= 75) {
-            message = this.loadingMessages[3];
-        }
-
-        if (messageElement.textContent !== message) {
-            messageElement.textContent = message;
-        }
-    }
 
     waitForPageLoad() {
         return new Promise((resolve) => {
