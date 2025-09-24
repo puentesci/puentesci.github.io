@@ -440,6 +440,11 @@
     animation: progressShine 2s ease-out forwards;
 }
 
+/* Hide loader instantly on sessions that skip */
+html.ps-skip-loader .loading-screen {
+    display: none !important;
+}
+
 /* Respect reduced motion preferences for loading screen */
 @media (prefers-reduced-motion: reduce) {
     .loading-logo::before,

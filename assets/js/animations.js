@@ -308,6 +308,11 @@ class LoadingAnimation {
         this.loadingScreen = document.getElementById('loading-screen');
         this.progressBar = document.querySelector('.progress-bar');
         this.isComplete = false;
+        try {
+            this.skip = sessionStorage.getItem('ps_loader_shown') === '1';
+        } catch (e) {
+            this.skip = false;
+        }
         this.loadingStartTime = performance.now();
         this.minLoadingTime = this.getMinLoadingTime();
         this.resourceProgress = {
@@ -355,6 +360,15 @@ class LoadingAnimation {
 
     start() {
         if (!this.loadingScreen) return Promise.resolve();
+
+        // Skip loader entirely if already shown this session
+        if (this.skip) {
+            this.loadingScreen.style.display = 'none';
+            document.body.classList.add('loaded');
+            this.animateHeroTitle();
+            dispatchCustomEvent('pageLoaded');
+            return Promise.resolve();
+        }
 
         return new Promise((resolve) => {
             this.setupResourceTracking();
@@ -561,6 +575,9 @@ class LoadingAnimation {
             
             // Trigger page loaded event
             dispatchCustomEvent('pageLoaded');
+
+            // Mark loader as shown for this session
+            try { sessionStorage.setItem('ps_loader_shown', '1'); } catch (e) {}
         }, 500);
     }
 
