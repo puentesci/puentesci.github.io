@@ -358,8 +358,7 @@ class LoadingAnimation {
         const messages = [
             "Loading Puente Scientific...",
             "Preparing your experience...",
-            "Almost ready...",
-            "Welcome to Puente Scientific!"
+            "Almost ready..."
         ];
         
         // Add network-specific messages

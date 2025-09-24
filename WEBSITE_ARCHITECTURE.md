@@ -55,8 +55,35 @@ This repo was refactored to use a single Jekyll layout with shared includes. The
 - Keep `<main id="main-content">` in each page to maintain accessibility.
 - See `AGENTS.md`, `PROTECTED_FILES.md`, and `BUSINESS_CONTENT.md` for detailed constraints.
 
+## Local Dev
+
+- See LOCAL_DEVELOPMENT.md for setup and common issues.
+- Commit Gemfile and Gemfile.lock for reproducible local builds.
+- Do not commit build output or vendored gems; they are ignored.
+
 ## Notes
 
 - Domain is configured via `CNAME` (`puentescientific.com`); `_config.yml` sets `url` accordingly.
 - GitHub Pages will build Jekyll automatically — no extra tooling required.
 
+## 🚀 Local Development
+
+### Quick Start
+```bash
+# Install dependencies
+bundle install --path vendor/bundle
+
+# Start development server
+bundle exec jekyll serve --port 4000 --host 0.0.0.0
+```
+
+### Access
+- **Local**: `http://localhost:4000`
+- **Network**: `http://0.0.0.0:4000`
+
+### Stop Server
+```bash
+pkill -f jekyll
+```
+
+**📖 Full Guide**: See `LOCAL_DEVELOPMENT.md` for detailed instructions.

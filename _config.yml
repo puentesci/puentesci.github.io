@@ -16,4 +16,8 @@ exclude:
   - PROTECTED_FILES.md
   - BUSINESS_CONTENT.md
   - docs
-
+  - vendor
+  - .bundle
+  - _site
+  - Gemfile
+  - Gemfile.lock
