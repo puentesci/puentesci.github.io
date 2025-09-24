@@ -1,0 +1,19 @@
+title: Puente Scientific
+url: https://puentescientific.com
+baseurl: ""
+
+# Enable Jekyll processing for GitHub Pages
+markdown: kramdown
+theme: null
+
+# Build settings
+exclude:
+  - node_modules
+  - README.md
+  - AI_INSTRUCTIONS.md
+  - AI_QUICK_REFERENCE.md
+  - AI_SAFETY_CHECKLIST.md
+  - PROTECTED_FILES.md
+  - BUSINESS_CONTENT.md
+  - docs
+

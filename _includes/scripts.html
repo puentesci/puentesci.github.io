@@ -1,0 +1,17 @@
+<!-- Shared scripts -->
+<script src="{{ site.baseurl }}/assets/js/utils.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/config.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/performance.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/accessibility.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/analytics.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/eventHandlers.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/animations.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/components.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ site.baseurl }}/assets/js/main.js?v={{ site.time | date: '%s' }}" defer></script>
+
+{% if page.extra_scripts %}
+  {% for script in page.extra_scripts %}
+    <script src="{{ site.baseurl }}/{{ script }}?v={{ site.time | date: '%s' }}" defer></script>
+  {% endfor %}
+{% endif %}
+

@@ -1,0 +1,38 @@
+<!-- Shared site header / navigation -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <img src="{{ site.baseurl }}/assets/images/logo.png" alt="Puente Scientific" class="nav-logo">
+      <a href="https://al.ltddir.com/companies/puente-scientific-llc/" target="_blank" rel="noopener noreferrer" class="nav-title">An Alabama based company</a>
+    </div>
+
+    <div class="nav-menu" id="nav-menu">
+      <a href="#home" class="nav-link" data-translate="nav-home" data-fallback="{{ site.baseurl }}/index.html#home">Home</a>
+      <a href="{{ site.baseurl }}/about.html" class="nav-link" data-translate="nav-about" data-fallback="{{ site.baseurl }}/about.html">About</a>
+      <a href="{{ site.baseurl }}/products.html" class="nav-link" data-translate="nav-products" data-fallback="{{ site.baseurl }}/products.html">Products</a>
+      <a href="{{ site.baseurl }}/contact.html" class="nav-link" data-translate="nav-contact" data-fallback="{{ site.baseurl }}/contact.html">Contact</a>
+    </div>
+
+    <div class="nav-controls">
+      <div class="language-selector-nav" id="language-selector-nav">
+        <label for="language-select" class="language-label">Language:</label>
+        <select id="language-select" class="language-select">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="zh">中文</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon sun-icon">☀️</span>
+        <span class="theme-icon moon-icon">🌙</span>
+      </button>
+    </div>
+
+    <div class="nav-toggle" id="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>

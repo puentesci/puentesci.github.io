@@ -1,0 +1,61 @@
+<!-- Shared <head> content -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ page.description | default: 'Puente Scientific - Professional Export Company specializing in international trade and logistics solutions' }}">
+<meta name="keywords" content="{{ page.keywords | default: 'export, import, international trade, logistics, Puente Scientific' }}">
+<meta name="author" content="Puente Scientific">
+<meta name="theme-color" content="#FFFFFF">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
+<meta property="og:description" content="{{ page.description | default: 'Leading export company specializing in international trade and logistics solutions' }}">
+<meta property="og:image" content="{{ page.og_image | default: site.baseurl | append: '/assets/images/logo.png' }}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+<meta property="twitter:title" content="{{ page.title | default: site.title }}">
+<meta property="twitter:description" content="{{ page.description | default: 'Leading export company specializing in international trade and logistics solutions' }}">
+<meta property="twitter:image" content="{{ page.og_image | default: site.baseurl | append: '/assets/images/logo.png' }}">
+
+<title>{{ page.title | default: site.title }}</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/logo.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/reset.css?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/animations.css?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/components.css?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/responsive.css?v={{ site.time | date: '%s' }}">
+
+{% if page.extra_css %}
+  {% for css in page.extra_css %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/{{ css }}?v={{ site.time | date: '%s' }}">
+  {% endfor %}
+{% endif %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XV96WERESM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);} 
+  gtag('js', new Date());
+  gtag('config', 'G-XV96WERESM');
+  // Expose for modules that wait for gtag
+  window.gtag = window.gtag || gtag;
+  window.dataLayer = window.dataLayer || [];
+  window.prefersReducedMotion = window.prefersReducedMotion || function(){
+    try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){ return false; }
+  };
+</script>
+
