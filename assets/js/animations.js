@@ -147,6 +147,7 @@ class AnimationController {
 
     updateParallax(scrollY) {
         if (this.isReducedMotion) return;
+        if (isTouchDevice() || window.innerWidth < 640) return;
 
         const heroParticles = document.querySelector('.hero-particles');
         const heroGrid = document.querySelector('.hero-grid');
@@ -172,7 +173,7 @@ class AnimationController {
     }
 
     createFloatingParticles(container) {
-        const particleCount = isTouchDevice() ? 15 : 25;
+        const particleCount = isTouchDevice() ? 8 : 20;
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -334,16 +335,18 @@ class LoadingAnimation {
     }
 
     getMinLoadingTime() {
-        // Adjust minimum loading time based on network conditions
+        // Adjust minimum loading time based on network conditions and device type
+        const isMobile = isTouchDevice() || window.innerWidth < 768;
+        
         if (navigator.connection) {
             const connection = navigator.connection;
             if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-                return 2000; // 2 seconds for slow connections
+                return isMobile ? 800 : 600; // Much faster without logo
             } else if (connection.effectiveType === '3g') {
-                return 1500; // 1.5 seconds for medium connections
+                return isMobile ? 600 : 400; // Much faster without logo
             }
         }
-        return 1000; // 1 second for fast connections
+        return isMobile ? 500 : 300; // Very fast without logo
     }
 
     getNetworkInfo() {
@@ -382,7 +385,7 @@ class LoadingAnimation {
             // Wait for actual page load
             const actualLoadPromise = this.waitForPageLoad();
             
-            // Resolve when both conditions are met
+            // Resolve when both conditions are met (no logo waiting)
             Promise.all([minTimePromise, actualLoadPromise]).then(() => {
                 this.complete();
                 resolve();
@@ -545,8 +548,14 @@ class LoadingAnimation {
             const clamped = Math.min(totalProgress, 100);
             // Use transform for GPU-accelerated, layout-safe updates
             this.progressBar.style.transform = `scaleX(${clamped / 100})`;
+            
+            // Add a subtle pulse effect when progress is active
+            if (clamped > 0 && clamped < 100) {
+                this.progressBar.style.animation = 'progressPulse 1.5s ease-in-out infinite';
+            } else {
+                this.progressBar.style.animation = 'none';
+            }
         }
-
     }
 
 
@@ -559,6 +568,7 @@ class LoadingAnimation {
             }
         });
     }
+
 
     complete() {
         if (this.isComplete || !this.loadingScreen) return;

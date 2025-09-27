@@ -388,30 +388,39 @@
         transform: scale(1);
         filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
     }
+}
+
+/* New animation for loaded logo that starts from hidden state */
+@keyframes logoLoadedEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: drop-shadow(0 0 0px rgba(0, 166, 81, 0));
+    }
+    30% {
+        opacity: 0.9;
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 15px rgba(0, 166, 81, 0.4));
+    }
     60% {
         opacity: 1;
         transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
-    }
-    70% {
-        opacity: 1;
-        transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
-    }
-    80% {
-        opacity: 1;
-        transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
-    }
-    90% {
-        opacity: 1;
-        transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
+        filter: drop-shadow(0 0 20px rgba(0, 166, 81, 0.3));
     }
     100% {
         opacity: 1;
         transform: scale(1);
-        filter: drop-shadow(0 0 20px rgba(40, 171, 255, 0.3));
+        filter: drop-shadow(0 0 20px rgba(0, 166, 81, 0.3));
+    }
+}
+
+/* Progress bar pulse animation */
+@keyframes progressPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 166, 81, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 166, 81, 0.6);
     }
 }
 

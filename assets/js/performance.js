@@ -19,6 +19,7 @@ class PerformanceManager {
         this.preloadCriticalResources();
         this.setupServiceWorker();
         this.optimizeFontLoading();
+        this.applyNativeLazyLoading();
     }
 
     setupLazyLoading() {
@@ -61,6 +62,17 @@ class PerformanceManager {
             if (!link.href.includes('display=swap')) {
                 link.href += '&display=swap';
             }
+        });
+    }
+
+    applyNativeLazyLoading() {
+        // Mark non-critical images for native lazy loading
+        const images = document.querySelectorAll('img:not([loading])');
+        images.forEach(img => {
+            // Skip loader and header logo
+            if (img.closest('#loading-screen') || img.closest('.nav-brand')) return;
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute('decoding', img.getAttribute('decoding') || 'async');
         });
     }
 }
