@@ -934,6 +934,28 @@
     opacity: 1;
 }
 
+/* Hover guard for touch devices to prevent sticky hover styles */
+@media (hover: none) and (pointer: coarse) {
+    .nav-title:hover,
+    .nav-logo:hover,
+    .language-select:hover,
+    .theme-toggle:hover,
+    .products-page .equipment-item:hover,
+    .products-page .equipment-item:hover::before,
+    .footer-logo:hover,
+    .language-option:not(.active):hover,
+    .footer-brand .footer-links a:hover,
+    .data-point:hover,
+    .data-point:hover .point-value {
+        transform: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+        opacity: initial !important;
+        color: inherit !important;
+        background: inherit !important;
+    }
+}
+
 .chart-labels {
     position: absolute;
     bottom: -25px;

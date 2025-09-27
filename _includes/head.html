@@ -25,6 +25,22 @@
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/logo.png">
 
+<!-- No preload needed for text-based loading screen -->
+
+<!-- Early session flag to skip loader without flash -->
+<script>
+  try {
+    if (sessionStorage.getItem('ps_loader_shown') === '1') {
+      document.documentElement.classList.add('ps-skip-loader');
+    }
+  } catch (e) {}
+  // Expose reduced motion preference early
+  window.prefersReducedMotion = window.prefersReducedMotion || function(){
+    try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){ return false; }
+  };
+  
+</script>
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,4 +74,3 @@
     try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){ return false; }
   };
 </script>
-

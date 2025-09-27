@@ -147,6 +147,7 @@ class AnimationController {
 
     updateParallax(scrollY) {
         if (this.isReducedMotion) return;
+        if (isTouchDevice() || window.innerWidth < 640) return;
 
         const heroParticles = document.querySelector('.hero-particles');
         const heroGrid = document.querySelector('.hero-grid');
@@ -172,7 +173,7 @@ class AnimationController {
     }
 
     createFloatingParticles(container) {
-        const particleCount = isTouchDevice() ? 15 : 25;
+        const particleCount = isTouchDevice() ? 8 : 20;
         
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -308,6 +309,11 @@ class LoadingAnimation {
         this.loadingScreen = document.getElementById('loading-screen');
         this.progressBar = document.querySelector('.progress-bar');
         this.isComplete = false;
+        try {
+            this.skip = sessionStorage.getItem('ps_loader_shown') === '1';
+        } catch (e) {
+            this.skip = false;
+        }
         this.loadingStartTime = performance.now();
         this.minLoadingTime = this.getMinLoadingTime();
         this.resourceProgress = {
@@ -326,21 +332,21 @@ class LoadingAnimation {
             fonts: 10
         };
         this.networkInfo = this.getNetworkInfo();
-        this.loadingMessages = this.getLoadingMessages();
-        this.currentMessageIndex = 0;
     }
 
     getMinLoadingTime() {
-        // Adjust minimum loading time based on network conditions
+        // Adjust minimum loading time based on network conditions and device type
+        const isMobile = isTouchDevice() || window.innerWidth < 768;
+        
         if (navigator.connection) {
             const connection = navigator.connection;
             if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-                return 2000; // 2 seconds for slow connections
+                return isMobile ? 800 : 600; // Much faster without logo
             } else if (connection.effectiveType === '3g') {
-                return 1500; // 1.5 seconds for medium connections
+                return isMobile ? 600 : 400; // Much faster without logo
             }
         }
-        return 1000; // 1 second for fast connections
+        return isMobile ? 500 : 300; // Very fast without logo
     }
 
     getNetworkInfo() {
@@ -354,27 +360,21 @@ class LoadingAnimation {
         return null;
     }
 
-    getLoadingMessages() {
-        const messages = [
-            "Loading Puente Scientific...",
-            "Preparing your experience...",
-            "Almost ready..."
-        ];
-        
-        // Add network-specific messages
-        if (this.networkInfo && this.networkInfo.effectiveType === 'slow-2g') {
-            messages.splice(1, 0, "Optimizing for your connection...");
-        }
-        
-        return messages;
-    }
 
     start() {
         if (!this.loadingScreen) return Promise.resolve();
 
+        // Skip loader entirely if already shown this session
+        if (this.skip) {
+            this.loadingScreen.style.display = 'none';
+            document.body.classList.add('loaded');
+            this.animateHeroTitle();
+            dispatchCustomEvent('pageLoaded');
+            return Promise.resolve();
+        }
+
         return new Promise((resolve) => {
             this.setupResourceTracking();
-            this.setupLoadingMessages();
             this.updateProgress();
             
             // Ensure minimum loading time for smooth UX
@@ -385,7 +385,7 @@ class LoadingAnimation {
             // Wait for actual page load
             const actualLoadPromise = this.waitForPageLoad();
             
-            // Resolve when both conditions are met
+            // Resolve when both conditions are met (no logo waiting)
             Promise.all([minTimePromise, actualLoadPromise]).then(() => {
                 this.complete();
                 resolve();
@@ -393,28 +393,6 @@ class LoadingAnimation {
         });
     }
 
-    setupLoadingMessages() {
-        const messageElement = this.loadingScreen.querySelector('.loading-message');
-        if (!messageElement) return;
-
-        // Show first message immediately
-        messageElement.textContent = this.loadingMessages[0];
-        
-        // Update messages based on progress
-        const messageInterval = setInterval(() => {
-            if (this.isComplete) {
-                clearInterval(messageInterval);
-                return;
-            }
-            
-            this.currentMessageIndex = Math.min(
-                this.currentMessageIndex + 1,
-                this.loadingMessages.length - 1
-            );
-            
-            messageElement.textContent = this.loadingMessages[this.currentMessageIndex];
-        }, this.minLoadingTime / this.loadingMessages.length);
-    }
 
     setupResourceTracking() {
         // Track DOM loading
@@ -567,34 +545,19 @@ class LoadingAnimation {
             (this.resourceProgress.fonts * this.resourceWeights.fonts / 100);
 
         if (this.progressBar) {
-            this.progressBar.style.width = `${Math.min(totalProgress, 100)}%`;
+            const clamped = Math.min(totalProgress, 100);
+            // Use transform for GPU-accelerated, layout-safe updates
+            this.progressBar.style.transform = `scaleX(${clamped / 100})`;
             
-            // Add smooth transition effect
-            this.progressBar.style.transition = 'width 0.3s ease-out';
-        }
-
-        // Update loading message based on progress
-        this.updateLoadingMessage(totalProgress);
-    }
-
-    updateLoadingMessage(progress) {
-        const messageElement = this.loadingScreen.querySelector('.loading-message');
-        if (!messageElement) return;
-
-        let message = this.loadingMessages[0];
-        
-        if (progress >= 25 && progress < 50) {
-            message = this.loadingMessages[1];
-        } else if (progress >= 50 && progress < 75) {
-            message = this.loadingMessages[2];
-        } else if (progress >= 75) {
-            message = this.loadingMessages[3];
-        }
-
-        if (messageElement.textContent !== message) {
-            messageElement.textContent = message;
+            // Add a subtle pulse effect when progress is active
+            if (clamped > 0 && clamped < 100) {
+                this.progressBar.style.animation = 'progressPulse 1.5s ease-in-out infinite';
+            } else {
+                this.progressBar.style.animation = 'none';
+            }
         }
     }
+
 
     waitForPageLoad() {
         return new Promise((resolve) => {
@@ -605,6 +568,7 @@ class LoadingAnimation {
             }
         });
     }
+
 
     complete() {
         if (this.isComplete || !this.loadingScreen) return;
@@ -621,6 +585,9 @@ class LoadingAnimation {
             
             // Trigger page loaded event
             dispatchCustomEvent('pageLoaded');
+
+            // Mark loader as shown for this session
+            try { sessionStorage.setItem('ps_loader_shown', '1'); } catch (e) {}
         }, 500);
     }
 
