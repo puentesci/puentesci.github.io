@@ -1012,3 +1012,169 @@
         top: -30px;
     }
 }
+
+/* Thank You Page Styles */
+.thank-you-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-20) 0;
+    background: var(--bg-primary);
+}
+
+.thank-you-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-8);
+}
+
+.thank-you-icon {
+    color: var(--primary-teal);
+    margin-bottom: var(--space-8);
+    display: flex;
+    justify-content: center;
+}
+
+.thank-you-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-tight);
+}
+
+.thank-you-message {
+    font-size: var(--font-size-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-relaxed);
+}
+
+.thank-you-details {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    margin: var(--space-8) 0;
+    text-align: left;
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.thank-you-details h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    text-align: center;
+}
+
+.thank-you-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.thank-you-details li {
+    padding: var(--space-3) 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: var(--space-8);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-normal);
+}
+
+.thank-you-details li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-teal);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+}
+
+.thank-you-details a {
+    color: var(--primary-teal);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-normal);
+}
+
+.thank-you-details a:hover {
+    color: var(--primary-teal-bright);
+    text-decoration: underline;
+}
+
+.thank-you-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+}
+
+/* Responsive Design for Thank You Page */
+@media (max-width: 768px) {
+    .thank-you-page {
+        padding: var(--space-12) 0;
+    }
+    
+    .thank-you-content {
+        padding: var(--space-4);
+    }
+    
+    .thank-you-title {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .thank-you-message {
+        font-size: var(--font-size-lg);
+    }
+    
+    .thank-you-details {
+        padding: var(--space-6);
+    }
+    
+    .thank-you-details h2 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .thank-you-details li {
+        font-size: var(--font-size-base);
+    }
+    
+    .thank-you-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Dark mode for Thank You Page */
+[data-theme="dark"] .thank-you-details {
+    background: var(--bg-secondary);
+    border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .thank-you-details h2 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .thank-you-details li {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .thank-you-details a {
+    color: var(--primary-teal);
+}
+
+[data-theme="dark"] .thank-you-details a:hover {
+    color: var(--primary-teal-bright);
+}
