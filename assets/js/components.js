@@ -201,44 +201,17 @@ class ContactFormComponent {
     }
 
     async handleSubmit(e) {
-        e.preventDefault();
-        
+        // Allow form to submit naturally to forms.un-static.com
+        // Only prevent if validation fails
         if (!this.validateForm()) {
+            e.preventDefault();
             return;
         }
 
-        this.setSubmitState('loading');
-        
-        try {
-            const formData = new FormData(this.form);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Simulate form submission (replace with actual endpoint)
-            await this.submitForm(data);
-            
-            this.setSubmitState('success');
-            this.showMessage('Thank you! Your message has been sent successfully.', 'success');
-            this.form.reset();
-            
-        } catch (error) {
-            this.setSubmitState('error');
-            this.showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
-        }
+        // Let the form submit naturally to the endpoint
+        // The forms.un-static.com service will handle the redirect
     }
 
-    async submitForm(data) {
-        // Simulate API call
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate success/failure
-                if (Math.random() > 0.1) {
-                    resolve(data);
-                } else {
-                    reject(new Error('Submission failed'));
-                }
-            }, 2000);
-        });
-    }
 
     validateForm() {
         const inputs = this.form.querySelectorAll('input[required], textarea[required]');
@@ -317,69 +290,6 @@ class ContactFormComponent {
         }
     }
 
-    setSubmitState(state) {
-        if (!this.submitButton) return;
-
-        switch (state) {
-            case 'loading':
-                this.submitButton.disabled = true;
-                this.submitButton.textContent = 'Sending...';
-                this.submitButton.style.opacity = '0.7';
-                break;
-            case 'success':
-                this.submitButton.textContent = 'Sent!';
-                this.submitButton.style.background = '#10b981';
-                setTimeout(() => this.resetSubmitButton(), 3000);
-                break;
-            case 'error':
-                this.submitButton.textContent = 'Try Again';
-                this.submitButton.style.background = '#ef4444';
-                setTimeout(() => this.resetSubmitButton(), 3000);
-                break;
-            default:
-                this.resetSubmitButton();
-        }
-    }
-
-    resetSubmitButton() {
-        if (!this.submitButton) return;
-        
-        this.submitButton.disabled = false;
-        this.submitButton.textContent = this.originalButtonText;
-        this.submitButton.style.opacity = '';
-        this.submitButton.style.background = '';
-    }
-
-    showMessage(text, type) {
-        const messageElement = document.createElement('div');
-        messageElement.className = `form-message ${type}`;
-        messageElement.textContent = text;
-        messageElement.style.cssText = `
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            animation: slideInUp 0.3s ease-out;
-            ${type === 'success' ? 'background: #dcfce7; color: #166534; border: 1px solid #bbf7d0;' : ''}
-            ${type === 'error' ? 'background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;' : ''}
-        `;
-
-        // Remove existing messages
-        const existingMessage = this.form.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-
-        this.form.appendChild(messageElement);
-
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            if (messageElement.parentNode) {
-                messageElement.style.animation = 'fadeOut 0.3s ease-out';
-                setTimeout(() => messageElement.remove(), 300);
-            }
-        }, 5000);
-    }
 }
 
 class ScrollIndicatorComponent {
