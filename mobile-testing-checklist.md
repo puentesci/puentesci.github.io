@@ -8,13 +8,13 @@
 ./mobile-dev-script.sh
 
 # Or manually start server
-python3 -m http.server 8000
+bundle exec jekyll serve --host 0.0.0.0 --port 4000
 ```
 
 ### **2. Access Testing URLs**
-- **Desktop**: http://localhost:8000
-- **Mobile**: http://YOUR_IP:8000 (find IP with `ifconfig`)
-- **Test Page**: http://localhost:8000/mobile-test.html
+- **Desktop**: http://localhost:4000
+- **Mobile**: http://YOUR_IP:4000 (find IP with `ifconfig`)
+- **Test Page**: http://localhost:4000/mobile-test.html
 
 ## 📱 **Device Testing Matrix**
 
@@ -283,13 +283,13 @@ python3 -m http.server 8000
 ./mobile-dev-script.sh
 
 # Test specific page
-open http://localhost:8000/mobile-test.html
+open http://localhost:4000/mobile-test.html
 
 # Run Lighthouse audit
 # Open Chrome DevTools → Lighthouse → Generate report
 
 # Test on real device
-# Connect phone to WiFi → Visit http://YOUR_IP:8000
+# Connect phone to WiFi → Visit http://YOUR_IP:4000
 ```
 
 **Remember**: Test early, test often, and test on real devices whenever possible!

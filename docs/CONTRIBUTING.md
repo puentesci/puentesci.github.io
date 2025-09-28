@@ -22,20 +22,13 @@ git clone https://github.com/puentesci/puentesci.github.io.git
 # Navigate to project directory
 cd puentesci.github.io
 
-# Start a local server (choose one):
-# Python 3
-python -m http.server 8000
+# Start Jekyll development server
+bundle exec jekyll serve --host 0.0.0.0 --port 4000
 
-# Python 2
-python -m SimpleHTTPServer 8000
+# Alternative: Use the mobile development script
+./mobile-dev-script.sh
 
-# Node.js (if you have npx)
-npx serve .
-
-# PHP
-php -S localhost:8000
-
-# Then visit http://localhost:8000
+# Then visit http://localhost:4000
 ```
 
 ## Project Structure

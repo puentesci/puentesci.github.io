@@ -16,7 +16,7 @@ echo "✅ Project directory confirmed"
 
 # Start local development server
 echo "🌐 Starting local development server..."
-echo "   Server will be available at: http://localhost:8000"
+echo "   Server will be available at: http://localhost:4000"
 echo "   For mobile testing, use your computer's IP address"
 echo ""
 
@@ -27,22 +27,24 @@ if [ -z "$LOCAL_IP" ]; then
 fi
 
 echo "📱 Mobile Testing URLs:"
-echo "   Desktop: http://localhost:8000"
-echo "   Mobile:  http://$LOCAL_IP:8000"
-echo "   Test Page: http://localhost:8000/mobile-test.html"
+echo "   Desktop: http://localhost:4000"
+echo "   Mobile:  http://$LOCAL_IP:4000"
+echo "   Test Page: http://localhost:4000/mobile-test.html"
 echo ""
 
-# Check if Python 3 is available
-if command -v python3 &> /dev/null; then
-    echo "🐍 Python 3 found - starting server..."
+# Check if Jekyll is available
+if command -v bundle &> /dev/null && [ -f "Gemfile" ]; then
+    echo "🔧 Jekyll found - starting Jekyll development server..."
     echo "   Press Ctrl+C to stop the server"
     echo ""
     
-    # Start the server in the background
-    python3 -m http.server 8000 &
+    # Start Jekyll server in the background
+    bundle exec jekyll serve --host 0.0.0.0 --port 4000 &
     SERVER_PID=$!
     
-    echo "✅ Server started with PID: $SERVER_PID"
+    echo "✅ Jekyll server started with PID: $SERVER_PID"
+    echo "   Server running at: http://localhost:4000"
+    echo "   Mobile testing: http://$LOCAL_IP:4000"
     echo ""
     echo "🔧 Mobile Testing Tools:"
     echo "   1. Chrome DevTools: F12 → Device toolbar"
@@ -51,7 +53,7 @@ if command -v python3 &> /dev/null; then
     echo ""
     echo "📱 Real Device Testing:"
     echo "   1. Connect phone to same WiFi network"
-    echo "   2. Visit: http://$LOCAL_IP:8000"
+    echo "   2. Visit: http://$LOCAL_IP:4000"
     echo "   3. Test all pages and interactions"
     echo ""
     echo "⚡ Performance Testing:"
@@ -85,19 +87,10 @@ if command -v python3 &> /dev/null; then
     # Wait for user to stop the server
     wait $SERVER_PID
     
-elif command -v python &> /dev/null; then
-    echo "🐍 Python 2 found - starting server..."
-    echo "   Press Ctrl+C to stop the server"
-    echo ""
-    python -m SimpleHTTPServer 8000 &
-    SERVER_PID=$!
-    echo "✅ Server started with PID: $SERVER_PID"
-    echo "Press Ctrl+C to stop the server when done testing"
-    wait $SERVER_PID
-    
 else
-    echo "❌ Python not found. Please install Python 3 to run the development server."
-    echo "   You can still test by opening index.html directly in a browser."
+    echo "❌ Jekyll not found or Gemfile missing."
+    echo "   Please ensure you have Jekyll installed and are in the correct directory."
+    echo "   Try running: bundle install"
     exit 1
 fi
 

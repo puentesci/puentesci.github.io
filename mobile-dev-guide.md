@@ -5,11 +5,11 @@
 ### Local Development Server
 ```bash
 # Start local server (already running)
-python3 -m http.server 8000
+bundle exec jekyll serve --host 0.0.0.0 --port 4000
 
 # Access from mobile devices
 # Find your IP: ifconfig | grep "inet " | grep -v 127.0.0.1
-# Then visit: http://YOUR_IP:8000
+# Then visit: http://YOUR_IP:4000
 ```
 
 ### Browser DevTools Testing
@@ -19,7 +19,7 @@ python3 -m http.server 8000
 
 ### Real Device Testing
 1. **Same Network**: Use computer's IP address
-2. **Public URL**: `npx ngrok http 8000` (install ngrok first)
+2. **Public URL**: `npx ngrok http 4000` (install ngrok first)
 3. **Chrome Remote**: USB debugging for Android
 
 ## 📱 Mobile UX Fundamentals
@@ -123,12 +123,12 @@ python3 -m http.server 8000
 ## 📱 Device Testing URLs
 
 ### Local Testing
-- Desktop: http://localhost:8000
-- Mobile: http://YOUR_IP:8000
+- Desktop: http://localhost:4000
+- Mobile: http://YOUR_IP:4000
 
 ### Public Testing (with ngrok)
 ```bash
-npx ngrok http 8000
+npx ngrok http 4000
 # Use the https URL provided
 ```
 

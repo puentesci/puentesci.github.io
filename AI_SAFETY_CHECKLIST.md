@@ -63,7 +63,7 @@
 ## 🧪 **TESTING CHECKLIST**
 
 ### **Before Committing Changes:**
-- [ ] ✅ Test changes on localhost (http://localhost:8000)
+- [ ] ✅ Test changes on localhost (http://localhost:4000)
 - [ ] ✅ Verify all business content is preserved
 - [ ] ✅ Check that statistics are unchanged
 - [ ] ✅ Confirm navigation includes all required items
