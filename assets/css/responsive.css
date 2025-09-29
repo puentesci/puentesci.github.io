@@ -1,4 +1,4 @@
-/* Responsive Design */
+/* Responsive Design - Updated Mobile Layout v4 - Final */
 
 /* Large Desktop (1280px and up) */
 @media (min-width: 1280px) {
@@ -145,12 +145,24 @@
         padding-top: var(--header-height);
     }
     
+    .hero-content {
+        align-items: center;
+    }
+    
     .hero-title {
-        font-size: var(--font-size-3xl);
+        font-size: 4.275rem; /* 5% smaller than 4.5rem */
+        margin-top: 0;
+        margin-bottom: var(--space-4); /* Reduced spacing */
+        position: relative;
+        top: -80px; /* Only move the title up */
     }
     
     .hero-subtitle {
-        font-size: var(--font-size-lg);
+        font-size: 1.76rem !important; /* 28.16px - 10% bigger */
+        margin-top: -var(--space-20); /* Very significant change */
+        margin-bottom: var(--space-4);
+        position: relative;
+        top: -40px; /* Additional dramatic positioning */
     }
     
     .hero-buttons {
@@ -229,12 +241,28 @@
         --section-padding: var(--space-10);
     }
     
+    .hero {
+        align-items: center;
+    }
+    
+    .hero-content {
+        align-items: center;
+    }
+    
     .hero-title {
-        font-size: var(--font-size-2xl);
+        font-size: 3.42rem; /* 5% smaller than 3.6rem */
+        margin-top: 0;
+        margin-bottom: var(--space-3); /* Reduced spacing */
+        position: relative;
+        top: -60px; /* Only move the title up */
     }
     
     .hero-subtitle {
-        font-size: var(--font-size-base);
+        font-size: 1.32rem !important; /* 21.12px - 10% bigger */
+        margin-top: -var(--space-16); /* Very significant change */
+        margin-bottom: var(--space-3);
+        position: relative;
+        top: -30px; /* Additional dramatic positioning */
     }
     
     .hero-buttons {
@@ -331,8 +359,28 @@
         height: 36px;
     }
     
+    .hero {
+        align-items: center;
+    }
+    
+    .hero-content {
+        align-items: center;
+    }
+    
     .hero-title {
-        font-size: var(--font-size-xl);
+        font-size: 2.565rem; /* 5% smaller than 2.7rem */
+        margin-top: 0;
+        margin-bottom: var(--space-2); /* Reduced spacing */
+        position: relative;
+        top: -40px; /* Only move the title up */
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem !important; /* 17.6px - 10% bigger */
+        margin-top: -var(--space-12); /* Very significant change */
+        margin-bottom: var(--space-2);
+        position: relative;
+        top: -20px; /* Additional dramatic positioning */
     }
     
     /* Holographic title small mobile adjustments */

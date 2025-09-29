@@ -697,6 +697,27 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(element);
         });
     });
+    
+    // Fallback animation trigger for mobile devices
+    // This ensures the hero title animation works even if loading is skipped
+    setTimeout(() => {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && !heroTitle.classList.contains('animate-title-slide') && !prefersReducedMotion()) {
+            if (!heroTitle.hasAttribute('data-disable-entrance')) {
+                heroTitle.classList.add('animate-title-slide');
+            }
+        }
+    }, 100);
+    
+    // Additional fallback for when page is fully loaded
+    window.addEventListener('load', () => {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && !heroTitle.classList.contains('animate-title-slide') && !prefersReducedMotion()) {
+            if (!heroTitle.hasAttribute('data-disable-entrance')) {
+                heroTitle.classList.add('animate-title-slide');
+            }
+        }
+    });
 });
 
 // Clean up on page unload
