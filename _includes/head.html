@@ -1,8 +1,8 @@
 <!-- Shared <head> content -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="{{ page.description | default: 'Puente Scientific - Professional Export Company specializing in international trade and logistics solutions' }}">
-<meta name="keywords" content="{{ page.keywords | default: 'export, import, international trade, logistics, Puente Scientific' }}">
+<meta name="description" content="{{ page.description | default: 'Refurbished HPLC systems, columns, deuterium lamps, and hard-to-find lab parts — tested U.S. equipment shipped to laboratories worldwide.' }}">
+<meta name="keywords" content="{{ page.keywords | default: 'refurbished HPLC, used lab equipment, HPLC columns, deuterium lamps, lab equipment export, Puente Scientific' }}">
 <meta name="author" content="Puente Scientific">
 <meta name="theme-color" content="#FFFFFF">
 
@@ -10,20 +10,50 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:title" content="{{ page.title | default: site.title }}">
-<meta property="og:description" content="{{ page.description | default: 'Leading export company specializing in international trade and logistics solutions' }}">
-<meta property="og:image" content="{{ page.og_image | default: site.baseurl | append: '/assets/images/logo.png' }}">
+<meta property="og:description" content="{{ page.description | default: 'Refurbished HPLC systems, columns, deuterium lamps, and hard-to-find lab parts — tested U.S. equipment shipped to laboratories worldwide.' }}">
+<meta property="og:image" content="{{ site.url }}{{ page.og_image | default: '/assets/images/logo.png' }}">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
 <meta property="twitter:title" content="{{ page.title | default: site.title }}">
-<meta property="twitter:description" content="{{ page.description | default: 'Leading export company specializing in international trade and logistics solutions' }}">
-<meta property="twitter:image" content="{{ page.og_image | default: site.baseurl | append: '/assets/images/logo.png' }}">
+<meta property="twitter:description" content="{{ page.description | default: 'Refurbished HPLC systems, columns, deuterium lamps, and hard-to-find lab parts — tested U.S. equipment shipped to laboratories worldwide.' }}">
+<meta property="twitter:image" content="{{ site.url }}{{ page.og_image | default: '/assets/images/logo.png' }}">
 
 <title>{{ page.title | default: site.title }}</title>
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/logo.png">
+
+<!-- Organization structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://puentescientific.com/#org",
+  "name": "Puente Scientific LLC",
+  "url": "https://puentescientific.com",
+  "logo": "https://puentescientific.com/assets/images/logo.png",
+  "description": "Refurbished HPLC and laboratory equipment, replacement parts sourcing, and export services.",
+  "duns": "14-068-8697",
+  "email": "info@puentescientific.com",
+  "telephone": "+1-205-256-5953",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1430 Gadsden Highway, Suite 116, PMB 2843",
+    "addressLocality": "Birmingham",
+    "addressRegion": "AL",
+    "postalCode": "35235",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/puente-scientific-llc",
+    "https://x.com/PuenteSci",
+    "https://www.instagram.com/puentescientific/",
+    "https://www.tiktok.com/@puentescientific"
+  ]
+}
+</script>
 
 <!-- No preload needed for text-based loading screen -->
 

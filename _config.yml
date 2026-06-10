@@ -6,6 +6,9 @@ baseurl: ""
 markdown: kramdown
 theme: null
 
+plugins:
+  - jekyll-sitemap
+
 # Build settings
 exclude:
   - node_modules
