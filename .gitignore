@@ -9,6 +9,7 @@ vendor/
 
 # OS/Editor files
 .DS_Store
+._*
 *.swp
 *.swo
 *~
