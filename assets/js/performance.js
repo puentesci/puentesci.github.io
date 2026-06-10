@@ -6,9 +6,7 @@ class PerformanceManager {
             criticalResources: [
                 '/assets/css/main.css',
                 '/assets/js/animations.js',
-                '/assets/images/logo.png',
-                // Preload loading-screen logo to avoid empty flash
-                '/assets/images/upscale logo.png'
+                '/assets/images/logo.png'
             ],
             ...config
         };

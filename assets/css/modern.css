@@ -302,6 +302,13 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
 .form-group + .form-row { margin-top: 1rem; }
 .form-row .form-group { margin-top: 0; }
 
+/* Slider images are wrapped in <picture> for WebP; pass slide sizing through */
+.slider-slide picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* ---------- Products catalog ---------- */
 .product-grid {
   display: grid;
@@ -315,10 +322,11 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
   border: 1px solid var(--border-primary);
 }
 
+.product-card picture,
 .product-card img {
   width: 100%;
   height: auto;
-  aspect-ratio: 2754 / 1536;
+  aspect-ratio: 800 / 446;
   object-fit: cover;
   display: block;
 }
