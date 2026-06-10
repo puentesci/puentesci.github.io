@@ -1,0 +1,337 @@
+/* ============================================================
+   PUENTE SCIENTIFIC — MODERN LAYER (modern.css)
+   ------------------------------------------------------------
+   Purpose: additive refinement layer loaded AFTER all other
+   stylesheets (see _includes/head.html). It modernizes type,
+   spacing, surfaces, and responsiveness WITHOUT replacing or
+   editing existing CSS files.
+
+   Safety design:
+   - Theme-agnostic: borders/surfaces use color-mix with
+     currentColor, so they adapt to light AND dark mode.
+   - No transforms on slider arrows/dots/scroll indicator
+     (existing CSS likely positions them via translate).
+   - No changes to loading screen, slider track, or nav toggle
+     mechanics (JS-controlled).
+   - Rollback: delete this file + its <link> in head.html.
+
+   Protected content untouched: hero title, 45/2025/85 stats,
+   Products nav link, contact details. (See BUSINESS_CONTENT.md)
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  --ps-accent: #2E6BE6;            /* lab blue */
+  --ps-spectrum: linear-gradient(90deg, #7C5CFF 0%, #2E6BE6 55%, #19B8A6 100%); /* UV→visible nod */
+  --ps-ring: color-mix(in srgb, var(--ps-accent) 25%, transparent);
+
+  --ps-hairline: color-mix(in srgb, currentColor 12%, transparent);
+  --ps-hairline-strong: color-mix(in srgb, currentColor 22%, transparent);
+  --ps-surface: color-mix(in srgb, currentColor 4%, transparent);
+  --ps-surface-hover: color-mix(in srgb, currentColor 7%, transparent);
+
+  --ps-radius-s: 10px;
+  --ps-radius-m: 14px;
+  --ps-radius-l: 20px;
+
+  --ps-shadow-s: 0 1px 2px rgb(0 0 0 / 0.05), 0 2px 8px rgb(0 0 0 / 0.05);
+  --ps-shadow-m: 0 2px 4px rgb(0 0 0 / 0.06), 0 10px 28px rgb(0 0 0 / 0.08);
+
+  --ps-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- 2. Foundations ---------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+::selection { background: color-mix(in srgb, var(--ps-accent) 25%, transparent); }
+
+:focus-visible {
+  outline: 2px solid var(--ps-accent);
+  outline-offset: 2px;
+}
+
+/* Form controls (checkboxes, etc.) pick up the brand accent */
+input, textarea, select, button { accent-color: var(--ps-accent); }
+
+/* ---------- 3. Fluid type scale ---------- */
+.hero-title {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: clamp(2.4rem, 1.2rem + 6vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 0.92rem + 0.5vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.section-title,
+.about-title,
+.contact-title,
+.legal-title,
+.thank-you-title {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: clamp(1.8rem, 1.3rem + 2.4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.about-subtitle,
+.legal-subtitle {
+  font-size: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
+}
+
+/* Comfortable reading measure on long-form prose */
+.about-text p,
+.history-text p,
+.vision-text p,
+.legal-section p,
+.contact-description {
+  max-width: 65ch;
+  line-height: 1.7;
+}
+
+/* ---------- 4. Signature: spectral calibration line ----------
+   A hairline gradient under section titles — violet→blue→teal,
+   echoing UV detection / the deuterium-lamp side of the catalog. */
+.section-header .section-title {
+  position: relative;
+  padding-bottom: 0.9rem;
+}
+.section-header .section-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 64px;
+  height: 3px;
+  margin-left: -32px; /* center without transform */
+  border-radius: 999px;
+  background: var(--ps-spectrum);
+}
+
+/* ---------- 5. Nav + footer refinement ---------- */
+.navbar {
+  border-bottom: 1px solid var(--ps-hairline);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+}
+
+.nav-link {
+  border-radius: 8px;
+  transition: color 0.2s var(--ps-ease), background-color 0.2s var(--ps-ease), opacity 0.2s var(--ps-ease);
+}
+
+.language-select {
+  border-radius: var(--ps-radius-s);
+  border: 1px solid var(--ps-hairline-strong);
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.theme-toggle { cursor: pointer; }
+
+.footer {
+  border-top: 1px solid var(--ps-hairline);
+}
+
+/* ---------- 6. Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.2s var(--ps-ease), box-shadow 0.2s var(--ps-ease), opacity 0.2s var(--ps-ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ps-shadow-m);
+}
+.btn:active { transform: translateY(0); }
+
+.btn-secondary { border: 1px solid var(--ps-hairline-strong); }
+
+/* ---------- 7. Surfaces: stats, cards, slider, pills ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.stat-item {
+  margin: 0;
+  padding: 1.4rem 1.1rem;
+  border: 1px solid var(--ps-hairline);
+  border-radius: var(--ps-radius-m);
+  background: var(--ps-surface);
+  text-align: center;
+  transition: transform 0.25s var(--ps-ease), border-color 0.25s var(--ps-ease), background-color 0.25s var(--ps-ease);
+}
+.stat-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--ps-hairline-strong);
+  background: var(--ps-surface-hover);
+}
+.stat-number {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-variant-numeric: tabular-nums; /* steady width during count-up */
+  font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.stat-label {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* Contact page method cards */
+.contact-method {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--ps-hairline);
+  border-radius: var(--ps-radius-m);
+  background: var(--ps-surface);
+  transition: transform 0.25s var(--ps-ease), border-color 0.25s var(--ps-ease);
+}
+.contact-method:hover {
+  transform: translateY(-2px);
+  border-color: var(--ps-hairline-strong);
+}
+.contact-method + .contact-method { margin-top: 0.9rem; }
+
+/* Homepage contact rows: lighter touch */
+.contact-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--ps-hairline);
+}
+.contact-item:last-child { border-bottom: 0; }
+
+/* Product slider polish (cosmetic only — no repositioning) */
+.slider-container {
+  border-radius: var(--ps-radius-l);
+  overflow: hidden;
+}
+.visual-container { border-radius: var(--ps-radius-l); }
+.slider-btn {
+  border: 1px solid var(--ps-hairline-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: opacity 0.2s var(--ps-ease), border-color 0.2s var(--ps-ease), box-shadow 0.2s var(--ps-ease);
+}
+.slider-btn:hover { box-shadow: var(--ps-shadow-s); }
+.slider-dot { cursor: pointer; transition: opacity 0.2s var(--ps-ease); }
+
+/* Products page equipment list → tag pills */
+.equipment-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.equipment-item {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--ps-hairline-strong);
+  border-radius: 999px;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s var(--ps-ease), background-color 0.2s var(--ps-ease);
+}
+.equipment-item:hover { background: var(--ps-surface); }
+
+/* Social icons: gentle lift */
+.social-link { transition: transform 0.2s var(--ps-ease), opacity 0.2s var(--ps-ease); }
+.social-link:hover { transform: translateY(-2px); }
+
+/* Legal pages: centered reading column */
+.legal-document {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.legal-section + .legal-section { margin-top: 2.2rem; }
+
+/* ---------- 8. Forms ---------- */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  min-height: 44px; /* tap-friendly */
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--ps-hairline-strong);
+  border-radius: 12px;
+  font: inherit;
+  transition: border-color 0.2s var(--ps-ease), box-shadow 0.2s var(--ps-ease);
+}
+.form-group textarea { resize: vertical; }
+.form-group input::placeholder,
+.form-group textarea::placeholder { opacity: 0.6; }
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--ps-accent);
+  box-shadow: 0 0 0 3px var(--ps-ring);
+}
+.form-group + .form-group { margin-top: 1rem; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-row + .form-row,
+.form-row + .form-group,
+.form-group + .form-row { margin-top: 1rem; }
+.form-row .form-group { margin-top: 0; }
+
+/* ---------- 9. Responsive collapses + mobile ergonomics ---------- */
+@media (max-width: 900px) {
+  .about-content,
+  .history-content,
+  .contact-content,
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-visual { order: -1; } /* product imagery first on mobile */
+}
+
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+  .section-header .section-title { padding-bottom: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons .btn {
+    width: 100%;
+  }
+  .stat-item { padding: 1.1rem 0.9rem; }
+  .scroll-indicator { display: none; } /* declutter short viewports */
+}
+
+/* ---------- 10. Motion & accessibility floor ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
