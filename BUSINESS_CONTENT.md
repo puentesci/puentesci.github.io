@@ -70,7 +70,7 @@
 ### **Primary Contact:**
 - **Email:** info@puentescientific.com
 - **Phone:** +1 (205) 256-5953
-- **Address:** 1941 Hoover CT, Hoover, AL 35226, U.S.A
+- **Address:** 1430 Gadsden Highway, Suite 116, PMB 2843, Birmingham, AL 35235, U.S.A.
 - **D-U-N-S Number:** 14-068-8697 (Verify with Dun & Bradstreet) 
 
 ### **Social Media:**

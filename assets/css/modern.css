@@ -300,6 +300,13 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
 .form-group + .form-row { margin-top: 1rem; }
 .form-row .form-group { margin-top: 0; }
 
+/* Payment trust line shown near forms and on the products page */
+.payment-note {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-tertiary, #888);
+}
+
 /* ---------- 9. Responsive collapses + mobile ergonomics ---------- */
 @media (max-width: 900px) {
   .about-content,
