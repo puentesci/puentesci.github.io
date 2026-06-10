@@ -263,7 +263,16 @@ class PuenteScientificApp {
                 'surplus-title': 'Have surplus lab equipment?',
                 'surplus-desc': 'We buy and consign used HPLC systems and parts.',
                 'surplus-cta': 'Get an offer',
-                'payment-note': 'Card payments (Visa, Mastercard, Amex via Stripe) and bank wire accepted. International orders welcome.'
+                'payment-note': 'Card payments (Visa, Mastercard, Amex via Stripe) and bank wire accepted. International orders welcome.',
+                'rfq-equipment-label': 'Equipment / part needed',
+                'rfq-manufacturer-label': 'Manufacturer & model',
+                'rfq-quantity-label': 'Quantity',
+                'rfq-country-label': 'Destination country',
+                'rfq-timeline-label': 'Timeline',
+                'rfq-timeline-select': 'Select a timeline (optional)',
+                'rfq-timeline-asap': 'As soon as possible',
+                'rfq-timeline-30': 'Within 30 days',
+                'rfq-timeline-exploring': 'Just exploring'
             },
             es: {
                 'nav-home': 'Inicio',

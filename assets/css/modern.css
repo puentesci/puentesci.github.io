@@ -270,7 +270,8 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
 
 /* ---------- 8. Forms ---------- */
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
   min-height: 44px; /* tap-friendly */
   padding: 0.8rem 1rem;
@@ -283,7 +284,8 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
 .form-group input::placeholder,
 .form-group textarea::placeholder { opacity: 0.6; }
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--ps-accent);
   box-shadow: 0 0 0 3px var(--ps-ring);

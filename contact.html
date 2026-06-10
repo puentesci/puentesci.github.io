@@ -172,6 +172,38 @@ Use targeted edits, NOT full file replacement!
                 </div>
               </div>
 
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="equipment" data-translate="rfq-equipment-label">Equipment / part needed</label>
+                  <input type="text" id="equipment" name="equipment" placeholder="e.g. Deuterium lamp, C18 column">
+                </div>
+                <div class="form-group">
+                  <label for="manufacturer-model" data-translate="rfq-manufacturer-label">Manufacturer &amp; model</label>
+                  <input type="text" id="manufacturer-model" name="manufacturer_model" placeholder="e.g. Agilent 1100">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="quantity" data-translate="rfq-quantity-label">Quantity</label>
+                  <input type="number" id="quantity" name="quantity" min="1" placeholder="1">
+                </div>
+                <div class="form-group">
+                  <label for="destination-country" data-translate="rfq-country-label">Destination country</label>
+                  <input type="text" id="destination-country" name="destination_country" placeholder="e.g. Colombia">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="timeline" data-translate="rfq-timeline-label">Timeline</label>
+                <select id="timeline" name="timeline">
+                  <option value="" data-translate="rfq-timeline-select">Select a timeline (optional)</option>
+                  <option value="As soon as possible" data-translate="rfq-timeline-asap">As soon as possible</option>
+                  <option value="Within 30 days" data-translate="rfq-timeline-30">Within 30 days</option>
+                  <option value="Just exploring" data-translate="rfq-timeline-exploring">Just exploring</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
