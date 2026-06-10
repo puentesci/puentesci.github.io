@@ -249,7 +249,21 @@ class PuenteScientificApp {
                 'cta-description': 'Contact us to discuss your equipment needs or to be notified when our inventory system goes live.',
                 'cta-contact': 'Contact Us',
                 'cta-learn': 'Learn More',
-                'contact-title': 'Let\'s Connect'
+                'contact-title': 'Let\'s Connect',
+                'product-prep-title': 'Sample Prep Kits',
+                'product-prep-desc': 'Filters, vials, caps, and accessories for HPLC sample preparation. Stocked consumables at refurbished-economy prices.',
+                'product-columns-title': 'HPLC Columns',
+                'product-columns-desc': 'Used and refurbished analytical columns, tested before shipment. Major manufacturers available on request.',
+                'product-lamps-title': 'Deuterium Lamps',
+                'product-lamps-desc': 'D2 replacement lamps for UV detectors. We source hard-to-find part numbers for discontinued instruments.',
+                'request-quote': 'Request a quote',
+                'request-quote-alt': 'Request a quote',
+                'sourcing-title': 'Looking for something specific?',
+                'sourcing-desc': 'We source hard-to-find parts and discontinued equipment worldwide. Tell us the manufacturer and part number — if it exists, we can usually find it.',
+                'surplus-title': 'Have surplus lab equipment?',
+                'surplus-desc': 'We buy and consign used HPLC systems and parts.',
+                'surplus-cta': 'Get an offer',
+                'payment-note': 'Card payments (Visa, Mastercard, Amex via Stripe) and bank wire accepted. International orders welcome.'
             },
             es: {
                 'nav-home': 'Inicio',
@@ -351,12 +365,11 @@ class PuenteScientificApp {
 
         const currentTranslations = translations[language] || translations.en;
         
-        // Apply translations to elements
+        // Apply translations to elements (a key may appear on multiple elements, e.g. repeated CTAs)
         Object.entries(currentTranslations).forEach(([key, value]) => {
-            const element = document.querySelector(`[data-translate="${key}"]`);
-            if (element) {
+            document.querySelectorAll(`[data-translate="${key}"]`).forEach((element) => {
                 element.textContent = value;
-            }
+            });
         });
 
         // Update document language
@@ -393,11 +406,23 @@ const initializeApp = () => {
     window.PuenteScientificApp = app;
 };
 
+// Progressive enhancement: prefill the contact form subject from ?subject= (used by product CTAs)
+const prefillSubjectFromQuery = () => {
+    try {
+        const subject = new URLSearchParams(window.location.search).get('subject');
+        const input = document.getElementById('subject');
+        if (subject && input && !input.value) {
+            input.value = subject;
+        }
+    } catch (e) { /* no-op: enhancement only */ }
+};
+
 // Wait for DOM to be ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
+    document.addEventListener('DOMContentLoaded', () => { initializeApp(); prefillSubjectFromQuery(); });
 } else {
     initializeApp();
+    prefillSubjectFromQuery();
 }
 
 // Handle page unload

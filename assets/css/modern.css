@@ -300,6 +300,89 @@ input, textarea, select, button { accent-color: var(--ps-accent); }
 .form-group + .form-row { margin-top: 1rem; }
 .form-row .form-group { margin-top: 0; }
 
+/* ---------- Products catalog ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-primary);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2754 / 1536;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}
+
+.product-card-body h3 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+}
+
+.product-card-body p {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  flex: 1;
+}
+
+.product-card-body .btn {
+  align-self: flex-start;
+}
+
+.sourcing-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.sourcing-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sourcing-item h3 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+}
+
+.sourcing-item p {
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  flex: 1;
+}
+
+.sourcing-item .btn {
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .sourcing-block { grid-template-columns: 1fr; }
+}
+
 /* Payment trust line shown near forms and on the products page */
 .payment-note {
   margin-top: 1rem;
